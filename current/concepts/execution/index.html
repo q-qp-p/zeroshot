@@ -560,6 +560,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#concurrent-workspace-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrent workspace changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#state-reduction-chooses-the-next-step" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -677,6 +688,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -729,6 +744,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/runtime-environments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prepare a runtime environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/observe-and-control/" class="md-nav__link">
         
   
@@ -737,6 +780,34 @@
     
   
     Observe and control runs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/acp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use a local graph as an ACP agent
   
 
     
@@ -1528,6 +1599,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#concurrent-workspace-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concurrent workspace changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#state-reduction-chooses-the-next-step" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1655,6 +1737,15 @@ runtime bindings, and the initial input; <code>--validate-only</code> runs them 
 <p>Selectors, guards, and bindings are structured data. They are not snippets of JavaScript, JSONPath,
 shell code, or prompt text. Full field rules live in the
 <a href="../../reference/cluster/graph/">graph contract</a>.</p>
+<h2 id="concurrent-workspace-changes">Concurrent workspace changes<a class="headerlink" href="#concurrent-workspace-changes" title="Permanent link">&para;</a></h2>
+<p><code>par</code> branches and <code>map</code> items can run multiple writing agents at once. Writers share the run's
+workspace, including reviewers, so the graph and agent instructions must coordinate edits to the
+same files. Reviewers see the same installed dependencies, generated output, and services as workers.
+Place verification after the writers when it needs their completed changes.</p>
+<p>Sequence Git delivery after the writing branches or map have joined. Graph validation rejects
+delivery alongside any other executable node, including reviewers, and delivery in a map that can
+have multiple items. A delivery receipt can certify run success only when every other executable
+settled before that delivery execution started.</p>
 <h2 id="state-reduction-chooses-the-next-step">State reduction chooses the next step<a class="headerlink" href="#state-reduction-chooses-the-next-step" title="Permanent link">&para;</a></h2>
 <p>An agent returns a value through a declared output channel. Zeroshot checks that value, applies
 authored bindings, and records the new state before it evaluates another node. Model output cannot
@@ -1670,13 +1761,41 @@ stop the controller.</p>
 after the terminal result. <a href="../../guides/observe-and-control/">Observe and control runs</a> covers the
 read and stop commands.</p>
 <h2 id="built-in-templates-are-ordinary-graphs">Built-in templates are ordinary graphs<a class="headerlink" href="#built-in-templates-are-ordinary-graphs" title="Permanent link">&para;</a></h2>
-<p>The executable contains <code>single-worker</code> and <code>software-change</code>, and both produce the public
-<code>GraphSpec</code> that custom submissions use:</p>
+<p>The executable contains <code>single-worker</code>, <code>software-change</code>, and <code>auto-research</code>. Each produces the
+public <code>GraphSpec</code> that custom submissions use:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">zeroshot template list</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">zeroshot template show software-change</span>
 </code></pre></div>
-<p><code>software-change</code> adds pull-request or merge delivery through <code>--pr</code> or <code>--ship</code>. That delivery is a
-graph node with its own runtime binding rather than an unrecorded agent side effect.</p>
+<p><code>software-change</code> has four delivery choices. The default keeps the accepted change local. <code>--push</code>
+publishes the managed run branch without opening a pull request. <code>--pr</code> opens or updates a pull
+request, processes visible review feedback, waits for required CI and a conflict-free head, then
+stops without merging. <code>--ship</code> uses the same feedback loop before it follows the repository's merge
+policy and confirms the merged revision. Missing approval doesn't block <code>--pr</code>; it still blocks
+<code>--ship</code> when GitHub requires it.</p>
+<p><code>auto-research</code> runs exactly ten iterations. Mapped explorer, synthesizer, and challenger scouts
+propose distinct ways to advance the caller's charter. A one-time read-only preflight requires the exact
+scout, judge, and experiment sets before the loop; mapped evidence, method, and progress judges
+then review it independently. Ignored scratch files carry their handoffs. Unanimous <code>adopt</code> keeps
+working changes. A supported negative or inconclusive result becomes
+<code>record_only</code> and restores those changes; invalid, incomplete, or unsafe evidence becomes <code>abort</code> and
+also restores them. Finalized records live under
+<code>.zeroshot/research/iterations/</code>; the charter, state, summary, and backlog live at the research root.
+Scratch handoffs and backups use per-iteration directories. A scout, selector, experimenter, or judge
+execution failure becomes a finalized aborted iteration; restoration runs when an experiment may have
+changed the workspace, and the bounded loop continues. A recorder or recovery failure stops before
+the next iteration. The charter distinguishes required invariants from
+optional progress measures. If evidence proves that the retained workspace violates an invariant,
+the selector prioritizes repair and judges treat a verified repair as adopt even when it does not
+clear an optional optimization threshold. Mutable state and summaries report the retained workspace
+and its invariant status separately from the best supported historical findings, so a result from a
+restored artifact is never presented as current.
+The template supports local results and <code>--push</code>. With <code>--push</code>, a read-only worker derives commit
+metadata from the finalized ledger, then the graph revisits its single Git delivery node after each
+iteration rather than only at graph completion. Manifest failures, delivery repair requests, and
+failed or rejected receipt audits stop the run instead of publishing an unreviewed repair.</p>
+<p>PR and merge delivery consider feedback by default. Use <code>--no-pr-feedback</code>, or set
+<code>pullRequestFeedback</code> to <code>ignore</code> on the delivery runtime binding, when the run should ignore PR
+discussion. CI, conflict, freshness, and merge-policy checks remain active.</p>
 
 
 
@@ -1784,7 +1903,7 @@ graph node with its own runtime binding rather than an unrecorded agent side eff
       
       
     
-    <a href="https://discord.gg/9Tnxd7XWa" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+    <a href="https://discord.gg/fZyzf2Cut9" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
     </a>
   

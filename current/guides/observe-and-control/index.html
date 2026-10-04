@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://the-open-engine.github.io/zeroshot/current/guides/observe-and-control/">
       
       
-        <link rel="prev" href="../../concepts/targets/">
+        <link rel="prev" href="../runtime-environments/">
       
       
-        <link rel="next" href="../python-sdk/">
+        <link rel="next" href="../acp/">
       
       
         
@@ -575,6 +575,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -619,6 +623,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-environments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prepare a runtime environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -687,6 +719,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browser
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#foreground-and-detached-submission" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -731,6 +774,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#restart-or-resume-a-failed-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restart or resume a failed run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stop-only-with-explicit-intent" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -745,6 +799,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use a local graph as an ACP agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1506,6 +1588,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browser
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#foreground-and-detached-submission" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1550,6 +1643,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#restart-or-resume-a-failed-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restart or resume a failed run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stop-only-with-explicit-intent" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1583,6 +1687,14 @@
 <h1 id="observe-and-control-runs">Observe and control runs<a class="headerlink" href="#observe-and-control-runs" title="Permanent link">&para;</a></h1>
 <p>Run state persists when an observation client leaves, and reconnecting does not change the run
 lifetime.</p>
+<h2 id="browser">Browser<a class="headerlink" href="#browser" title="Permanent link">&para;</a></h2>
+<p>Run <a href="../../getting-started/install/#open-the-workspace-ui"><code>zeroshot ui</code></a>, then select a run in <strong>Runs</strong>.
+The read-only graph uses that run's admitted definition. Select a node for its inputs, outputs,
+decisions, and transcript; use the timeline to replay its history. Active runs update live.
+Seeking pauses following; <strong>Go live</strong> returns to the latest event. Scrolling a transcript keeps
+the graph live and follows new output only when you reach the bottom.</p>
+<p>For a direct target, open <code>/ui/</code> on its configured public origin. Closing either browser view
+leaves the run active.</p>
 <h2 id="foreground-and-detached-submission">Foreground and detached submission<a class="headerlink" href="#foreground-and-detached-submission" title="Permanent link">&para;</a></h2>
 <p><code>zeroshot run</code> follows the durable event stream by default and writes NDJSON. Add <code>--detach</code> to
 return after submission:</p>
@@ -1616,9 +1728,37 @@ durable replay preserves it.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">zeroshot attach RUN_ID EXECUTION_REF</span>
 </code></pre></div>
 <p>Closing the attachment stream does not cancel the execution.</p>
+<h2 id="restart-or-resume-a-failed-run">Restart or resume a failed run<a class="headerlink" href="#restart-or-resume-a-failed-run" title="Permanent link">&para;</a></h2>
+<p>Failed local runs and direct targets retain their workspace. Restart the original graph using its
+latest files with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">zeroshot resume RUN_ID</span>
+</code></pre></div>
+<p>To resume at an earlier node, list its available input checkpoints and select one:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">zeroshot checkpoints RUN_ID</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">zeroshot resume RUN_ID --from-checkpoint CHECKPOINT_ID</span>
+</code></pre></div>
+<p>Add <code>--target NAME</code> to both commands for a named target. Checkpoint listings are paginated; use
+<code>--after CHECKPOINT_ID</code> with the returned <code>nextAfter</code> value to fetch the next page.</p>
+<p>A selected checkpoint restores the files from immediately before its node and the completed
+prerequisite outputs. The selected node runs again. Parallel and mapped groups have one checkpoint
+for the whole outer group, including nested groups and all mapped batches; individual concurrent
+writers do not have separate snapshots. Read-only boundaries can share the same workspace bytes.</p>
+<p>Both modes create a new run ID, keep the original graph, input, source, and delivery lineage, and
+resolve credentials again. The successor does not inherit provider sessions, secrets, or previous
+token usage. Selecting a checkpoint replaces later workspace edits, including untracked and ignored
+files. Restart restores the latest completed snapshot and starts the graph at its root. A sudden
+target loss can precede the next snapshot boundary, so the last writer may run again. Local workspaces
+must be idle while they are restored.</p>
+<p>Local and Docker targets deduplicate checkpoints in a private Restic repository beside their run
+storage and advertise <code>openengine.workspace-checkpoints/v1</code>. They retain that repository only for a
+failed recovery lineage and delete it after a successful run. Cloud exposes recovery through
+authenticated hosted run routes, so failed-run checkpoints remain available for 30 days after the
+original capsule is removed. Cloud resolves declared provider connections from their original
+references. It does not store a raw <code>GH_TOKEN</code>; export it again before resuming a named-target run
+that needs it for private source checkout or Git delivery.</p>
 <h2 id="stop-only-with-explicit-intent">Stop only with explicit intent<a class="headerlink" href="#stop-only-with-explicit-intent" title="Permanent link">&para;</a></h2>
 <p><code>force-stop</code> is the destructive run-lifetime command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">zeroshot force-stop RUN_ID</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">zeroshot force-stop RUN_ID</span>
 </code></pre></div>
 <p>The command asks the controller to stop active work and writes the resulting status as JSON. Read
 status first if another operator may already have stopped the run, or if it may have completed.</p>
@@ -1659,7 +1799,7 @@ status first if another operator may already have stopped the run, or if it may 
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../concepts/targets/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Targets">
+          <a href="../runtime-environments/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Prepare a runtime environment">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1669,20 +1809,20 @@ status first if another operator may already have stopped the run, or if it may 
                 Previous
               </span>
               <div class="md-ellipsis">
-                Targets
+                Prepare a runtime environment
               </div>
             </div>
           </a>
         
         
           
-          <a href="../python-sdk/" class="md-footer__link md-footer__link--next" aria-label="Next: Python SDK">
+          <a href="../acp/" class="md-footer__link md-footer__link--next" aria-label="Next: Use a local graph as an ACP agent">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Python SDK
+                Use a local graph as an ACP agent
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1731,7 +1871,7 @@ status first if another operator may already have stopped the run, or if it may 
       
       
     
-    <a href="https://discord.gg/9Tnxd7XWa" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+    <a href="https://discord.gg/fZyzf2Cut9" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
     </a>
   

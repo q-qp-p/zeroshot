@@ -16,7 +16,7 @@
         <link rel="prev" href="../runtimes-and-connections/">
       
       
-        <link rel="next" href="../../guides/observe-and-control/">
+        <link rel="next" href="../../guides/runtime-environments/">
       
       
         
@@ -666,6 +666,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -718,6 +722,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/runtime-environments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prepare a runtime environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/observe-and-control/" class="md-nav__link">
         
   
@@ -726,6 +758,34 @@
     
   
     Observe and control runs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/acp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use a local graph as an ACP agent
   
 
     
@@ -1565,12 +1625,85 @@ run state and resolves connections. The graph protocol stays the same when the t
 <p>Omit <code>--target</code> to work in the current Git worktree. Zeroshot starts a detached controller and keeps
 the run ledger under the local state directory, where later CLI invocations can list, watch, or stop
 the run.</p>
-<p>Local execution is the only mode that mutates the caller's existing worktree; the installed Codex or
-Claude harness runs as the current user.</p>
+<p>Local execution is the only mode that mutates the caller's existing worktree; the selected installed
+harness runs as the current user.</p>
+<p>Local Codex runs with <code>provider: "openai"</code> use the model provider and transport configured in the
+user's Codex configuration, including OpenAI-compatible proxies such as LiteLLM. Zeroshot supplies
+the runtime's model and any explicit reasoning effort, but leaves web search and sandbox network
+access to Codex's configuration. Explicit <code>openrouter</code>, <code>bedrock</code>, and <code>gateway</code> selections configure those
+providers; hosted targets use their own isolated provider setup.</p>
+<p>Local Claude runs use the current user's home and <code>CLAUDE_CONFIG_DIR</code>, when set. Local runs
+also inherit the shell's endpoint variables, including <code>OPENAI_BASE_URL</code>
+for Codex and <code>ANTHROPIC_BASE_URL</code> for Claude. Declared connection values take precedence over these
+shell defaults. Hosted adapters receive declared connection values without inheriting the host's
+shell settings. Explicit gateway selections use their <code>GATEWAY_BASE_URL</code> connection value. Local
+<code>anthropic</code> runs also inherit Claude's shell provider-selection flags. Explicit <code>openrouter</code>,
+<code>bedrock</code>, and <code>gateway</code> selections retain their provider setup and reject declared transport flags
+that would route to an incompatible provider.</p>
+<p>Local Copilot runs use the current user's <code>COPILOT_HOME</code> and system credential store. Ambient
+<code>COPILOT_GITHUB_TOKEN</code>, <code>GH_TOKEN</code>, or <code>GITHUB_TOKEN</code> values are selected in native precedence and
+sent through private RPC rather than the Copilot process or its tools. Copilot endpoint, proxy,
+certificate, and custom-provider environment settings are inherited locally. Static BYOK endpoint,
+credential, header, wire, and model-mapping settings are materialized into the private Copilot RPC
+session and removed from agent tool environments. <code>COPILOT_PROVIDER_API_KEY_COMMAND</code> crosses the
+singular private provider contract, which lets the pinned CLI refresh rotating keys for each request.
+Eligible helper-only invoking-shell fields are all marked through Copilot's <code>--secret-env-vars</code>, so
+they remain available to the internal provider command but are not inherited by agent shell or MCP
+environments. Runtime, auth, provider, and parent-process loader controls are excluded.
+That filtering is not a separate OS identity boundary against adversarial same-UID processes.
+A bounded <code>COPILOT_PROVIDERS_CONFIG</code> or default <code>COPILOT_HOME/providers.json</code> registry crosses as
+protocol provider/model values because the headless server does not import that path into sessions;
+a nonempty registry wins over legacy provider variables. An explicit declared token suppresses
+ambient BYOK and offline controls. Declared endpoint and credential fields cannot accidentally retain
+ambient credentials for a different route. The runtime model remains the process-level registry
+selection while provider <code>modelId</code> capability and wire-model mappings stay intact. A registry
+command translated to the singular RPC contract uses its authored <code>modelId</code> as that session's model.
+Contained targets use a private Copilot home and require the canonical <code>COPILOT_GITHUB_TOKEN</code>
+connection instead.</p>
+<p>The local target intentionally has the same-user trust boundary as running the harness CLI directly:
+native config, user files, and credential-store access remain subject to that harness's own sandbox
+and tool policy. Zeroshot transfers the invoking shell through a private, one-shot bootstrap and
+deletes it before the controller performs run effects; the detached controller itself receives only
+minimal platform environment. A later local CLI startup removes a bootstrap orphaned beyond the
+controller handoff window. This snapshot is never written to a run ledger or sent to a hosted target.</p>
+<p>Hosted Codex and Claude workers and verifiers always run with
+<code>--dangerously-bypass-approvals-and-sandbox</code> or <code>--dangerously-skip-permissions</code>, respectively.
+Zeroshot does not inspect the harness's native permission policy for hosted turns; the disposable
+capsule is the isolation boundary.</p>
+<p>Local Codex and Claude workers and verifiers use those flags only when no permission policy is
+configured. Before each local turn, Zeroshot queries the harness's resolved settings without sending
+a model prompt. Explicit approval, sandbox, permission rules, and managed restrictions take
+precedence, so Zeroshot adds no bypass flag in those cases. Claude shell permission controls are
+inherited locally too. If inspection fails or the CLI does not support it, the harness keeps its
+native permission behavior. Inspection adds one CLI startup per local turn and is bounded to ten
+seconds; it does not rewrite settings files, though the CLI may update its own startup state.</p>
+<p>Every agent verifier node, including those in custom profiles, uses the same permission handling as
+workers. Zeroshot automatically adds instructions to inspect without modifying source, tests,
+configuration, or other material under review or implementing repairs. Verifiers may run checks and
+create temporary files and generated artifacts, and must report failed or unavailable checks accurately.
+The built-in acceptance verifier also tries to run the repository's pre-commit checks and reports
+the results.</p>
+<p>Local and hosted verifiers operate directly on the candidate: the restriction on edits is instruction
+guidance, not a filesystem boundary. Hosted nodes share the prepared workspace and its owner identity.
+They retain separate session homes and process cleanup markers, so ending one node does not terminate
+another node or the run's startup services.</p>
+<p>Zeroshot controls the response format and session continuation. Web search follows Codex's
+configuration: by default it uses live search with full access and cached search otherwise. For local
+runs, an explicit <code>web_search="cached"</code> prevents Zeroshot from adding bypass because Codex can
+otherwise promote cached search to live search under full access. Hosted turns always use maximum
+bypass inside the disposable capsule, so Codex may promote cached search to live. Command network
+access follows the selected sandbox policy locally; hosted command isolation comes from the capsule.</p>
+<p>For local Codex, Zeroshot reads the active provider's <code>env_key</code> and environment-based header names
+from Codex's resolved configuration, then forwards only those values from the invoking shell to the
+model process. This lets custom OpenAI-compatible gateways keep using their existing Codex setup.
+Declared connection values take precedence, and a declared <code>OPENAI_API_KEY</code> remains available under
+that name. Zeroshot also supplies <code>CODEX_API_KEY</code> for native OpenAI authentication when needed.
+Values discovered from local configuration are not persisted or sent to hosted targets. See
+<a href="../runtimes-and-connections/">Runtimes and connections</a>.</p>
 <h2 id="direct-target">Direct target<a class="headerlink" href="#direct-target" title="Permanent link">&para;</a></h2>
 <p>A direct target exposes Zeroshot's HTTP and OECP contracts without application-level authentication.
-The released container includes Zeroshot plus pinned Codex and Claude harnesses.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">docker run --rm --detach --name zeroshot-target \</span>
+The released container includes Zeroshot plus pinned Codex, Claude, and GitHub Copilot harnesses.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">docker run --detach --restart unless-stopped --name zeroshot-target \</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">  -p 127.0.0.1:8080:8080 \</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">  -v zeroshot-data:/var/lib/zeroshot \</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">  ghcr.io/the-open-engine/zeroshot-target:latest</span>
@@ -1579,6 +1712,15 @@ The released container includes Zeroshot plus pinned Codex and Claude harnesses.
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="go">  --url http://127.0.0.1:8080 \</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">  --direct</span>
 </code></pre></div>
+<p>The target keeps running between runs. Docker restarts it after a reboot or unexpected exit with
+<code>--restart unless-stopped</code>; manually stopping it keeps it stopped until <code>docker start zeroshot-target</code>.
+Docker itself must be running. Stopping the target stops its runtime; restart retains history and
+marks interrupted runs as lost. When recovery data is available, start a successor with
+<code>zeroshot resume RUN_ID --target local-target</code>.</p>
+<p>The image's <code>target serve</code> process also serves the UI at <code>http://127.0.0.1:8080/ui/</code>.
+Profiles and run history persist under <code>--storage</code> in the named <code>zeroshot-data</code> volume, including
+when you recreate a container previously started with <code>--rm</code>. If you change the published port or
+use a proxy, set <code>--public-origin</code> to the exact browser origin.</p>
 <div class="admonition danger">
 <p class="admonition-title">Direct means unauthenticated</p>
 <p>Keep the published port on loopback or a trusted private network. Put an authenticated reverse
@@ -1657,13 +1799,13 @@ local and are never committed or pushed automatically.</p>
         
         
           
-          <a href="../../guides/observe-and-control/" class="md-footer__link md-footer__link--next" aria-label="Next: Observe and control runs">
+          <a href="../../guides/runtime-environments/" class="md-footer__link md-footer__link--next" aria-label="Next: Prepare a runtime environment">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Observe and control runs
+                Prepare a runtime environment
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1712,7 +1854,7 @@ local and are never committed or pushed automatically.</p>
       
       
     
-    <a href="https://discord.gg/9Tnxd7XWa" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+    <a href="https://discord.gg/fZyzf2Cut9" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
     </a>
   

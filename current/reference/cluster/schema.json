@@ -396,6 +396,13 @@
       ],
       "type": "object"
     },
+    "CheckpointId": {
+      "description": "Opaque run-scoped checkpoint identity. Clients must not interpret its spelling.",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+      "type": "string"
+    },
     "ChoiceBranch": {
       "additionalProperties": false,
       "properties": {
@@ -416,6 +423,7 @@
       "enum": [
         "anthropic",
         "openrouter",
+        "gateway",
         "bedrock"
       ],
       "type": "string"
@@ -465,6 +473,7 @@
       "enum": [
         "openai",
         "openrouter",
+        "gateway",
         "bedrock"
       ],
       "type": "string"
@@ -502,6 +511,12 @@
         "signal",
         "error",
         "group"
+      ],
+      "type": "string"
+    },
+    "CopilotProvider": {
+      "enum": [
+        "github"
       ],
       "type": "string"
     },
@@ -1014,9 +1029,13 @@
               "$ref": "#/$defs/PayloadType"
             },
             "timeoutMs": {
+              "description": "Omit to run until completion or cancellation.",
               "maximum": 9007199254740991,
               "minimum": 1,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "worker": {
               "maxLength": 256,
@@ -1038,7 +1057,6 @@
             "output",
             "inputBindings",
             "writeBindings",
-            "timeoutMs",
             "attempts"
           ],
           "type": "object"
@@ -1108,9 +1126,13 @@
               "type": "object"
             },
             "timeoutMs": {
+              "description": "Omit to run until completion or cancellation.",
               "maximum": 9007199254740991,
               "minimum": 1,
-              "type": "integer"
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "worker": {
               "maxLength": 256,
@@ -1132,7 +1154,6 @@
             "output",
             "inputBindings",
             "writeBindings",
-            "timeoutMs",
             "attempts",
             "signals",
             "diagnostic"
@@ -1441,7 +1462,7 @@
             "reason": {
               "maxLength": 128,
               "minLength": 1,
-              "pattern": "^(?!unhandled$)[A-Za-z_][A-Za-z0-9_.-]*$",
+              "pattern": "^(?!(?:unhandled|runtime_failed|runtime_lost|environment_setup_failed|environment_startup_failed|environment_preparation_timeout)$)[A-Za-z_][A-Za-z0-9_.-]*$",
               "type": "string"
             }
           },
@@ -2301,6 +2322,75 @@
       ],
       "type": "object"
     },
+    "JsonRpcRequest20": {
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/RequestId"
+        },
+        "jsonrpc": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/$defs/RunCheckpointsParams"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "method",
+        "params"
+      ],
+      "type": "object"
+    },
+    "JsonRpcRequest21": {
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/RequestId"
+        },
+        "jsonrpc": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/$defs/RunResumeParams"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "method",
+        "params"
+      ],
+      "type": "object"
+    },
+    "JsonRpcRequest22": {
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/RequestId"
+        },
+        "jsonrpc": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "$ref": "#/$defs/RunDiscardWorkspaceParams"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "method",
+        "params"
+      ],
+      "type": "object"
+    },
     "JsonRpcRequest3": {
       "properties": {
         "id": {
@@ -2576,6 +2666,36 @@
       "anyOf": [
         {
           "$ref": "#/$defs/JsonRpcSuccess2"
+        },
+        {
+          "$ref": "#/$defs/JsonRpcErrorResponse"
+        }
+      ]
+    },
+    "JsonRpcResponse20": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/JsonRpcSuccess20"
+        },
+        {
+          "$ref": "#/$defs/JsonRpcErrorResponse"
+        }
+      ]
+    },
+    "JsonRpcResponse21": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/JsonRpcSuccess21"
+        },
+        {
+          "$ref": "#/$defs/JsonRpcErrorResponse"
+        }
+      ]
+    },
+    "JsonRpcResponse22": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/JsonRpcSuccess22"
         },
         {
           "$ref": "#/$defs/JsonRpcErrorResponse"
@@ -2871,6 +2991,63 @@
         },
         "result": {
           "$ref": "#/$defs/PlanResult"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "result"
+      ],
+      "type": "object"
+    },
+    "JsonRpcSuccess20": {
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/RequestId"
+        },
+        "jsonrpc": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/$defs/RunCheckpointsResult"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "result"
+      ],
+      "type": "object"
+    },
+    "JsonRpcSuccess21": {
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/RequestId"
+        },
+        "jsonrpc": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/$defs/RunResumeResult"
+        }
+      },
+      "required": [
+        "jsonrpc",
+        "id",
+        "result"
+      ],
+      "type": "object"
+    },
+    "JsonRpcSuccess22": {
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/RequestId"
+        },
+        "jsonrpc": {
+          "type": "string"
+        },
+        "result": {
+          "$ref": "#/$defs/RunDiscardWorkspaceResult"
         }
       },
       "required": [
@@ -3231,6 +3408,9 @@
             "kind": {
               "const": "git_delivery",
               "type": "string"
+            },
+            "pullRequestFeedback": {
+              "$ref": "#/$defs/PullRequestFeedback"
             }
           },
           "required": [
@@ -3548,6 +3728,13 @@
       ],
       "type": "string"
     },
+    "PullRequestFeedback": {
+      "enum": [
+        "consider",
+        "ignore"
+      ],
+      "type": "string"
+    },
     "ReasoningEffort": {
       "enum": [
         "low",
@@ -3818,6 +4005,148 @@
       ],
       "type": "object"
     },
+    "RunCheckpoint": {
+      "additionalProperties": false,
+      "description": "A durable entry point immediately before the named node or outer concurrent group starts.\nParallel and mapped groups are atomic: their children and all map waves share one entry point.\nWorkspace bytes, storage locations, execution seeds, and credentials remain target-private.",
+      "properties": {
+        "checkpointId": {
+          "$ref": "#/$defs/CheckpointId"
+        },
+        "createdAt": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "loopIterations": {
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "mapIndices": {
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "node": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$",
+          "type": "string"
+        },
+        "sequence": {
+          "description": "Positive JavaScript-safe sequence, increasing within this run's checkpoint inventory.",
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "checkpointId",
+        "sequence",
+        "node",
+        "mapIndices",
+        "loopIterations",
+        "createdAt"
+      ],
+      "type": "object"
+    },
+    "RunCheckpointsParams": {
+      "additionalProperties": false,
+      "description": "Lists retained entry checkpoints in increasing sequence order. `after` is exclusive and must\nidentify a checkpoint in this run. Omitted `limit` means 50; accepted limits are 1 through 100.",
+      "properties": {
+        "after": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CheckpointId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limit": {
+          "format": "uint32",
+          "maximum": 100,
+          "minimum": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "runId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId"
+      ],
+      "type": "object"
+    },
+    "RunCheckpointsResult": {
+      "additionalProperties": false,
+      "description": "One bounded page. `nextAfter` is the last returned checkpoint identity only when more remain.",
+      "properties": {
+        "checkpoints": {
+          "items": {
+            "$ref": "#/$defs/RunCheckpoint"
+          },
+          "maxItems": 100,
+          "type": "array"
+        },
+        "nextAfter": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CheckpointId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "runId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "checkpoints"
+      ],
+      "type": "object"
+    },
+    "RunDiscardWorkspaceParams": {
+      "additionalProperties": false,
+      "properties": {
+        "runId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId"
+      ],
+      "type": "object"
+    },
+    "RunDiscardWorkspaceResult": {
+      "additionalProperties": false,
+      "properties": {
+        "discarded": {
+          "type": "boolean"
+        },
+        "runId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "discarded"
+      ],
+      "type": "object"
+    },
     "RunForceParams": {
       "additionalProperties": false,
       "description": "Requests the MVP's only stop mode: force. Repeated requests are idempotent at the run ledger.",
@@ -3861,6 +4190,9 @@
           "minLength": 1,
           "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
           "type": "string"
+        },
+        "workspaceRecovery": {
+          "$ref": "#/$defs/WorkspaceRecovery"
         }
       },
       "required": [
@@ -4000,6 +4332,112 @@
       },
       "type": "object"
     },
+    "RunResumeFrom": {
+      "description": "A new successor either restarts the graph on the latest workspace or continues from an entry\ncheckpoint with its matching predecessor outputs. Provider sessions are never resumed.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "restart",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "checkpointId": {
+              "$ref": "#/$defs/CheckpointId"
+            },
+            "kind": {
+              "const": "checkpoint",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "checkpointId"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "RunResumeParams": {
+      "additionalProperties": false,
+      "properties": {
+        "connectionResolver": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TargetConnectionResolver"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Run-scoped callback used to resolve fresh dynamic connection values."
+        },
+        "connections": {
+          "additionalProperties": false,
+          "description": "Fresh static connection values for the successor attempt.",
+          "patternProperties": {
+            "^[^\\u0000-\\u001f\\u007f-\\u009f]+$": {
+              "$ref": "#/$defs/StaticConnectionValues"
+            }
+          },
+          "type": "object"
+        },
+        "from": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RunResumeFrom"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Omission preserves restarting from the latest retained workspace."
+        },
+        "githubToken": {
+          "description": "Fresh GitHub credential for private source checkout or Git delivery.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "runId": {
+          "type": "string"
+        },
+        "successorRunId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "successorRunId"
+      ],
+      "type": "object"
+    },
+    "RunResumeResult": {
+      "additionalProperties": false,
+      "properties": {
+        "resumedFrom": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "resumedFrom"
+      ],
+      "type": "object"
+    },
     "RunSize": {
       "enum": [
         "small",
@@ -4122,6 +4560,9 @@
           "minLength": 1,
           "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
           "type": "string"
+        },
+        "workspaceRecovery": {
+          "$ref": "#/$defs/WorkspaceRecovery"
         }
       },
       "required": [
@@ -4138,6 +4579,16 @@
       "additionalProperties": false,
       "description": "Immutable, secret-free native-v2 submission admitted by the selected target.",
       "properties": {
+        "environment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RuntimeEnvironment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "graph": {
           "$ref": "#/$defs/GraphSpec"
         },
@@ -4280,8 +4731,71 @@
       ],
       "type": "object"
     },
+    "RuntimeEnvironment": {
+      "additionalProperties": false,
+      "description": "Setup runs as root before checkout; startup runs as the workspace user after checkout or restore.\nBoth hooks run again on a new attempt. Values here are public run configuration, never secrets.",
+      "properties": {
+        "connections": {
+          "$ref": "#/$defs/DeclaredConnections",
+          "description": "Exact connection fields available to setup and startup, separate from node credentials."
+        },
+        "setup": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "startup": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "variables": {
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[A-Za-z_][A-Za-z0-9_]*$": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "RuntimePlan": {
       "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "const": "copilot",
+              "type": "string"
+            },
+            "nodes": {
+              "additionalProperties": false,
+              "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_.-]*$": {
+                  "$ref": "#/$defs/NodeRuntimeBinding"
+                }
+              },
+              "type": "object"
+            },
+            "provider": {
+              "$ref": "#/$defs/CopilotProvider"
+            },
+            "size": {
+              "$ref": "#/$defs/RunSize"
+            }
+          },
+          "required": [
+            "harness",
+            "provider",
+            "size",
+            "nodes"
+          ],
+          "type": "object"
+        },
         {
           "additionalProperties": false,
           "properties": {
@@ -4386,6 +4900,15 @@
         "node_instance"
       ],
       "type": "string"
+    },
+    "StaticConnectionValues": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[A-Za-z_][A-Za-z0-9_]*$": {
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "StopMode": {
       "enum": [
@@ -4514,11 +5037,20 @@
       "type": "object"
     },
     "SubscriptionCloseReason": {
-      "enum": [
-        "done",
-        "SLOW_CONSUMER"
-      ],
-      "type": "string"
+      "oneOf": [
+        {
+          "enum": [
+            "done",
+            "SLOW_CONSUMER"
+          ],
+          "type": "string"
+        },
+        {
+          "const": "SOURCE_UNAVAILABLE",
+          "description": "The source could not read the remaining history; delivered events are retained, but the\nstream is incomplete. This is not a successful end or a request to reconnect indefinitely.",
+          "type": "string"
+        }
+      ]
     },
     "SubscriptionClosedNotification": {
       "additionalProperties": false,
@@ -4540,6 +5072,42 @@
       "required": [
         "subscriptionId",
         "reason"
+      ],
+      "type": "object"
+    },
+    "TargetConnectionResolver": {
+      "additionalProperties": false,
+      "description": "Run-scoped callback authority for dynamic connection keys.",
+      "properties": {
+        "bearerToken": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "keys": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sourceConnection": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "endpoint",
+        "bearerToken",
+        "keys"
       ],
       "type": "object"
     },
@@ -5092,6 +5660,50 @@
         }
       ]
     },
+    "WorkspaceRecovery": {
+      "additionalProperties": false,
+      "description": "Public recovery state. It never contains credentials, workspace paths, or checkpoint bytes.",
+      "properties": {
+        "connectionRequirements": {
+          "additionalProperties": false,
+          "description": "Exact connection fields that the successor must resolve again.",
+          "patternProperties": {
+            "^[^\\u0000-\\u001f\\u007f-\\u009f]+$": {
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "recoverable": {
+          "description": "Whether this run can admit a successor from retained workspace state.",
+          "type": "boolean"
+        },
+        "resumedFrom": {
+          "description": "Immediate predecessor when this run is itself a recovery successor.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "successorRunId": {
+          "description": "Successor already admitted from this run, if one exists.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "recoverable"
+      ],
+      "type": "object"
+    },
     "WriteBinding": {
       "additionalProperties": false,
       "properties": {
@@ -5200,6 +5812,18 @@
     "run_attach_response": {
       "$ref": "#/$defs/JsonRpcResponse18"
     },
+    "run_checkpoints_request": {
+      "$ref": "#/$defs/JsonRpcRequest20"
+    },
+    "run_checkpoints_response": {
+      "$ref": "#/$defs/JsonRpcResponse20"
+    },
+    "run_discard_workspace_request": {
+      "$ref": "#/$defs/JsonRpcRequest22"
+    },
+    "run_discard_workspace_response": {
+      "$ref": "#/$defs/JsonRpcResponse22"
+    },
     "run_force_request": {
       "$ref": "#/$defs/JsonRpcRequest19"
     },
@@ -5220,6 +5844,12 @@
     },
     "run_logs_response": {
       "$ref": "#/$defs/JsonRpcResponse17"
+    },
+    "run_resume_request": {
+      "$ref": "#/$defs/JsonRpcRequest21"
+    },
+    "run_resume_response": {
+      "$ref": "#/$defs/JsonRpcResponse21"
     },
     "run_status_request": {
       "$ref": "#/$defs/JsonRpcRequest15"
@@ -5316,7 +5946,13 @@
     "run_attach_response",
     "run_attach_event_notification",
     "run_force_request",
-    "run_force_response"
+    "run_force_response",
+    "run_checkpoints_request",
+    "run_checkpoints_response",
+    "run_resume_request",
+    "run_resume_response",
+    "run_discard_workspace_request",
+    "run_discard_workspace_response"
   ],
   "title": "ImplementedProtocolSchema",
   "type": "object"
