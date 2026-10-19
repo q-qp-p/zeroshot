@@ -778,6 +778,66 @@
       ],
       "type": "object"
     },
+    "FailureContext": {
+      "additionalProperties": false,
+      "description": "The known runtime cause and recent recorded node failures are deliberately separate.\nRecorded failures are evidence; retries or parallel branches may have recovered from them.",
+      "properties": {
+        "incomplete": {
+          "default": false,
+          "type": "boolean"
+        },
+        "primary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FailureDiagnostic"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recorded": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/FailureDiagnostic"
+          },
+          "maxItems": 5,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "FailureDiagnostic": {
+      "additionalProperties": false,
+      "description": "One recorded explanation, with an optional execution selector and retained log cursor.\nA missing cursor means there is no reference into the available durable history.",
+      "properties": {
+        "cursor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "execution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ActiveExecution"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "maxLength": 16384,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
     "FaultAction": {
       "description": "Descriptive only, like [`FaultRetryDisposition`]: naming `Retry` never itself retries or\nauthorizes a retry.",
       "enum": [
@@ -895,6 +955,65 @@
         "status"
       ],
       "type": "object"
+    },
+    "GitTransportCredentials": {
+      "description": "Private, bounded transport authority. It never belongs in a source record or submission digest.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "https",
+              "type": "string"
+            },
+            "password": {
+              "maxLength": 65536,
+              "minLength": 1,
+              "pattern": "^[^\\u0000]+$",
+              "type": "string"
+            },
+            "username": {
+              "maxLength": 65536,
+              "minLength": 1,
+              "pattern": "^[^\\u0000]+$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "username",
+            "password"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "ssh",
+              "type": "string"
+            },
+            "knownHosts": {
+              "maxLength": 65536,
+              "minLength": 1,
+              "pattern": "^[^\\u0000]+$",
+              "type": "string"
+            },
+            "privateKey": {
+              "maxLength": 65536,
+              "minLength": 1,
+              "pattern": "^[^\\u0000]+$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "privateKey",
+            "knownHosts"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "GraphDiagnostic": {
       "additionalProperties": false,
@@ -1317,6 +1436,21 @@
               "maximum": 9007199254740991,
               "minimum": 1,
               "type": "integer"
+            },
+            "maxIterationsInput": {
+              "description": "Optional initial-input path that replaces `max_iterations` for an admitted run.",
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$",
+                "type": "string"
+              },
+              "maxItems": 64,
+              "minItems": 1,
+              "type": [
+                "array",
+                "null"
+              ]
             },
             "name": {
               "maxLength": 128,
@@ -3384,6 +3518,16 @@
               "const": "agent",
               "type": "string"
             },
+            "lane": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/RuntimeLane"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
             "model": {
               "maxLength": 2048,
               "minLength": 1,
@@ -3663,6 +3807,17 @@
       ],
       "type": "string"
     },
+    "PiProvider": {
+      "description": "Provider lanes owned by the Pi harness.\n\nEach variant names one Pi provider whose credentials resolve through a named connection. Pi\nowns the wire behavior of every lane; this enum only selects which lane the adapter\nconfigures and which requirements admission materializes.",
+      "enum": [
+        "anthropic",
+        "openai",
+        "openrouter",
+        "gateway",
+        "bedrock"
+      ],
+      "type": "string"
+    },
     "PlanParams": {
       "additionalProperties": false,
       "properties": {
@@ -3781,7 +3936,85 @@
         }
       ]
     },
+    "ResolvedGitRemote": {
+      "additionalProperties": false,
+      "description": "Credential-free Git locator. Git effects use this transport; forge operations use `forge`.",
+      "properties": {
+        "connection": {
+          "description": "Explicit source-only connection authority; omitted for public or native local Git.",
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "forge": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceForgeIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "url": {
+          "allOf": [
+            {
+              "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$"
+            },
+            {
+              "if": {
+                "pattern": "://"
+              },
+              "then": {
+                "pattern": "^(https|ssh)://"
+              }
+            }
+          ],
+          "maxLength": 2048,
+          "minLength": 1,
+          "not": {
+            "pattern": "^[A-Za-z]:"
+          },
+          "pattern": "^(?:https://(?:\\[[A-Za-z0-9%:._-]+\\]|[^/@:?#\\\\\\s-][^/@:?#\\\\\\s]*)(?::[0-9]+)?(?:/[^?#\\\\\\s]*)?|ssh://(?:[^/@:?#\\\\\\s]+@)?(?:\\[[A-Za-z0-9%:._-]+\\]|[^/@:?#\\\\\\s-][^/@:?#\\\\\\s]*)(?::[0-9]+)?(?:/[^?#\\\\\\s]*)?|(?:[^/@:?#\\\\\\s]+@)?(?:\\[[A-Za-z0-9%:._-]+\\]|[^/@:?#\\\\\\s-][^/@:?#\\\\\\s]*):(?:[^/:?#\\\\\\s][^?#\\\\\\s]*|/(?:[^/?#\\\\\\s][^?#\\\\\\s]*)?))$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "type": "object"
+    },
     "ResolvedSource": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ResolvedSourceWire"
+        },
+        {
+          "else": {
+            "properties": {
+              "repository": {
+                "pattern": "^[A-Za-z0-9._-]{1,100}/[A-Za-z0-9._-]{1,100}$"
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "remote": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "remote"
+            ]
+          }
+        }
+      ]
+    },
+    "ResolvedSourceWire": {
       "additionalProperties": false,
       "properties": {
         "branch": {
@@ -3789,14 +4022,25 @@
           "minLength": 1,
           "type": "string"
         },
+        "remote": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResolvedGitRemote"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "repository": {
           "maxLength": 255,
-          "minLength": 3,
-          "pattern": "^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$",
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
           "type": "string"
         },
         "revision": {
-          "pattern": "^[0-9a-f]{40}$",
+          "pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$",
           "type": "string"
         }
       },
@@ -4177,7 +4421,14 @@
           "description": "Immutable execution size selected for the run."
         },
         "source": {
-          "$ref": "#/$defs/ResolvedSource",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResolvedSource"
+            },
+            {
+              "type": "null"
+            }
+          ],
           "description": "Immutable repository snapshot captured when the run was admitted."
         },
         "status": {
@@ -4198,7 +4449,6 @@
       "required": [
         "runId",
         "title",
-        "source",
         "size",
         "atCursor",
         "status"
@@ -4402,6 +4652,17 @@
           ],
           "description": "Omission preserves restarting from the latest retained workspace."
         },
+        "gitCredentials": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GitTransportCredentials"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Fresh generic Git authority, excluded from immutable source and submission identity."
+        },
         "githubToken": {
           "description": "Fresh GitHub credential for private source checkout or Git delivery.",
           "type": [
@@ -4550,7 +4811,14 @@
           "$ref": "#/$defs/RunSize"
         },
         "source": {
-          "$ref": "#/$defs/ResolvedSource"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResolvedSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "status": {
           "$ref": "#/$defs/RunStatus"
@@ -4568,7 +4836,6 @@
       "required": [
         "runId",
         "title",
-        "source",
         "size",
         "atCursor",
         "status"
@@ -4597,7 +4864,14 @@
           "$ref": "#/$defs/RuntimePlan"
         },
         "source": {
-          "$ref": "#/$defs/ResolvedSource"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResolvedSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "submissionKey": {
           "maxLength": 256,
@@ -4617,7 +4891,6 @@
         "graph",
         "initialInput",
         "runtime",
-        "source",
         "submissionKey"
       ],
       "type": "object"
@@ -4666,7 +4939,14 @@
           "$ref": "#/$defs/RunSize"
         },
         "source": {
-          "$ref": "#/$defs/ResolvedSource"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResolvedSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "status": {
           "$ref": "#/$defs/RunStatus"
@@ -4685,7 +4965,6 @@
         "subscriptionId",
         "runId",
         "title",
-        "source",
         "size",
         "cursor",
         "status"
@@ -4762,6 +5041,79 @@
         }
       },
       "type": "object"
+    },
+    "RuntimeLane": {
+      "description": "One harness and provider pair: the run-level default, or an agent node's override.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "const": "copilot",
+              "type": "string"
+            },
+            "provider": {
+              "$ref": "#/$defs/CopilotProvider"
+            }
+          },
+          "required": [
+            "harness",
+            "provider"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "const": "codex",
+              "type": "string"
+            },
+            "provider": {
+              "$ref": "#/$defs/CodexProvider"
+            }
+          },
+          "required": [
+            "harness",
+            "provider"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "const": "claude",
+              "type": "string"
+            },
+            "provider": {
+              "$ref": "#/$defs/ClaudeProvider"
+            }
+          },
+          "required": [
+            "harness",
+            "provider"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "const": "pi",
+              "type": "string"
+            },
+            "provider": {
+              "$ref": "#/$defs/PiProvider"
+            }
+          },
+          "required": [
+            "harness",
+            "provider"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "RuntimePlan": {
       "oneOf": [
@@ -4857,6 +5209,37 @@
             "nodes"
           ],
           "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "harness": {
+              "const": "pi",
+              "type": "string"
+            },
+            "nodes": {
+              "additionalProperties": false,
+              "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_.-]*$": {
+                  "$ref": "#/$defs/NodeRuntimeBinding"
+                }
+              },
+              "type": "object"
+            },
+            "provider": {
+              "$ref": "#/$defs/PiProvider"
+            },
+            "size": {
+              "$ref": "#/$defs/RunSize"
+            }
+          },
+          "required": [
+            "harness",
+            "provider",
+            "size",
+            "nodes"
+          ],
+          "type": "object"
         }
       ]
     },
@@ -4900,6 +5283,29 @@
         "node_instance"
       ],
       "type": "string"
+    },
+    "SourceForgeIdentity": {
+      "additionalProperties": false,
+      "description": "Optional forge identity selects one registered source-code adapter.",
+      "properties": {
+        "provider": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        },
+        "repository": {
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "repository"
+      ],
+      "type": "object"
     },
     "StaticConnectionValues": {
       "additionalProperties": false,
@@ -5132,6 +5538,16 @@
         {
           "additionalProperties": false,
           "properties": {
+            "context": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/FailureContext"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
             "reason": {
               "maxLength": 128,
               "minLength": 1,
