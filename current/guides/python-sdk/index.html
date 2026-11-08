@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Versioned documentation for the Zeroshot CLI, protocol, and Python SDK">
+        <meta name="description" content="Use the typed asynchronous zeroshot Python SDK with local, direct and hosted targets. Install a platform wheel and submit a run.">
       
       
       
@@ -45,15 +45,11 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spline+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Spline Sans";--md-code-font:"Roboto Mono"}</style>
-      
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/fonts/fonts.css">
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
@@ -63,6 +59,28 @@
 
     
     
+  
+  
+    
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="zeroshot">
+    <meta property="og:title" content="Python SDK | zeroshot docs">
+    <meta property="og:description" content="Use the typed asynchronous zeroshot Python SDK with local, direct and hosted targets. Install a platform wheel and submit a run.">
+    <meta property="og:url" content="https://zeroshot.sh/docs/current/guides/python-sdk/">
+    <meta property="og:image" content="https://zeroshot.sh/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Python SDK | zeroshot docs">
+    <meta name="twitter:description" content="Use the typed asynchronous zeroshot Python SDK with local, direct and hosted targets. Install a platform wheel and submit a run.">
+    <meta name="twitter:image" content="https://zeroshot.sh/og.jpg">
+    
+      
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/", "name": "zeroshot docs", "position": 1}, {"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/guides/python-sdk/", "name": "Python SDK", "position": 2}]}</script>
+    
+  
+
   </head>
   
   
@@ -581,6 +599,18 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -633,6 +663,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan work before running it
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../runtime-environments/" class="md-nav__link">
         
   
@@ -661,6 +719,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../active-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../review-loop/" class="md-nav__link">
         
   
@@ -669,6 +755,118 @@
     
   
     Build a review loop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review an issue or PR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review a PR in depth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forge-delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub and GitLab delivery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Submit a stack
   
 
     
@@ -838,10 +1036,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#submit-a-hosted-merge-plan" class="md-nav__link">
+  <a href="#submit-a-hosted-stack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Submit a hosted merge plan
+        Submit a hosted stack
       
     </span>
   </a>
@@ -1493,6 +1691,8 @@
       
         
       
+        
+      
     
     
     
@@ -1622,6 +1822,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/harness-adapters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness adapters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1636,14 +1864,14 @@
   
   
     <li class="md-nav__item">
-      <a href="https://cloud.zeroshot.sh/docs" class="md-nav__link">
+      <a href="https://app.zeroshot.sh/docs" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Zeroshot Cloud
+    Zeroshot Platform
   
 
     
@@ -1743,10 +1971,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#submit-a-hosted-merge-plan" class="md-nav__link">
+  <a href="#submit-a-hosted-stack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Submit a hosted merge plan
+        Submit a hosted stack
       
     </span>
   </a>
@@ -1789,11 +2017,11 @@
 targets. Each platform wheel contains the corresponding Zeroshot executable, which keeps the client
 and engine on one release line.</p>
 <h2 id="install-and-run">Install and run<a class="headerlink" href="#install-and-run" title="Permanent link">&para;</a></h2>
-<p>Download the wheel for your OS and CPU from <a href="https://github.com/the-open-engine/zeroshot/releases?q=zeroshot-python-v">Python SDK releases</a>.
-<code>x86_64</code> wheels target Intel/AMD CPUs; <code>arm64</code>/<code>aarch64</code> target ARM CPUs, including Apple silicon.
-Windows x64 uses <code>win_amd64</code>. Replace <code>WHEEL_FILE</code> with its local path:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">python -m pip install WHEEL_FILE</span>
+<p>Install from PyPI with Python 3.11 or newer. Pip selects the wheel for your OS and CPU:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">python -m pip install the-open-engine-zeroshot</span>
 </code></pre></div>
+<p>Supported platforms are Linux x64/ARM64, macOS Intel/Apple silicon, and Windows x64.
+Import the package as <code>zeroshot</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">zeroshot</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">UniformRuntime</span>
@@ -1820,10 +2048,13 @@ Windows x64 uses <code>win_amd64</code>. Replace <code>WHEEL_FILE</code> with it
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </code></pre></div>
-<p>Opening a client captures the current folder; the default preset is <code>Preset("software-change", delivery="none")</code>.
+<p>Opening a client captures the current folder; the default preset is <code>Preset("software-change")</code>.
+An omitted delivery selector uses the native template default: a PR for <code>software-change</code>, a comment
+for <code>pr-review</code>, <code>code-review</code> and <code>issue-review</code>. PR publication requires Git and credentials for a
+<a href="../forge-delivery/">supported forge</a>. Local delivery can reuse native <code>gh</code> or <code>glab</code> login.
+Use <code>Preset("software-change", delivery="none")</code> for local changes without publication.
 Per-run <code>cwd=</code> paths resolve from that captured folder, or <code>LocalTarget.workspace</code> when supplied.
-Local graphs without Git delivery accept plain folders. Push needs committed Git and a remote;
-PR and merge need a supported forge (GitHub today). Choose the harness, provider, and model.
+Local graphs without Git delivery accept plain folders. Push needs committed Git and a remote.
 <code>run()</code> submits once and waits; <code>submit()</code> returns a durable <code>Run</code> handle immediately.</p>
 <h2 id="watch-a-submitted-run">Watch a submitted run<a class="headerlink" href="#watch-a-submitted-run" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">zeroshot</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">UniformRuntime</span>
@@ -1854,48 +2085,63 @@ source, selected from the client workspace or per-run <code>repository=</code>, 
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">result</span><span class="o">.</span><span class="n">raise_for_failure</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="submit-a-hosted-merge-plan">Submit a hosted merge plan<a class="headerlink" href="#submit-a-hosted-merge-plan" title="Permanent link">&para;</a></h2>
-<p>Log in with the CLI first, then pass that target's local name to <code>HostedTarget</code>. A plan uses one
-explicit repository and branch plus one hosted profile. The profile must contain exactly one
-current Git merge delivery node. Agent bindings must not declare <code>GH_TOKEN</code>; only the Git
-delivery binding may declare it.</p>
+<h2 id="submit-a-hosted-stack">Submit a hosted stack<a class="headerlink" href="#submit-a-hosted-stack" title="Permanent link">&para;</a></h2>
+<p>Log in with the CLI first, then pass that target's local name to <code>HostedTarget</code>. A stack is an
+atomic, immutable DAG of runs over one explicit repository, base branch, and hosted profile,
+submitted at once. <code>delivery</code> chooses how it lands:</p>
+<ul>
+<li><code>"merge"</code>: the profile contains exactly one Git merge delivery node
+  (<code>builtin.git-delivery.merge@2</code> or <code>@3</code>). Each run merges into the base branch before its
+  dependents start, and a run may need several others.</li>
+<li><code>"stacked_pull_requests"</code>: the profile contains exactly one <code>builtin.git-delivery.pr@2</code> node.
+  Zeroshot turns the runs into one linear stack: each run needs exactly the run before it, in
+  dependency order with ties broken by run name. Each run opens a pull request against the previous
+  run's branch, the first against the base branch, and nothing is merged.</li>
+</ul>
+<p>In both modes, agent bindings must not declare <code>GH_TOKEN</code>; only the Git delivery binding may.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">UTC</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">zeroshot</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">HostedTarget</span><span class="p">,</span> <span class="n">MergePlanRequest</span><span class="p">,</span> <span class="n">MergePlanRun</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">zeroshot</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">HostedTarget</span><span class="p">,</span> <span class="n">StackRequest</span><span class="p">,</span> <span class="n">StackRun</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">submit_release_plan</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">request</span> <span class="o">=</span> <span class="n">MergePlanRequest</span><span class="p">(</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">submit_release_stack</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">request</span> <span class="o">=</span> <span class="n">StackRequest</span><span class="p">(</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="n">title</span><span class="o">=</span><span class="s2">"Release checkout update"</span><span class="p">,</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="n">repository</span><span class="o">=</span><span class="s2">"the-open-engine/zeroshot"</span><span class="p">,</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">branch</span><span class="o">=</span><span class="s2">"main"</span><span class="p">,</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">profile</span><span class="o">=</span><span class="s2">"org:software-change"</span><span class="p">,</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">expires_at</span><span class="o">=</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="n">runs</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>            <span class="s2">"backend"</span><span class="p">:</span> <span class="n">MergePlanRun</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">{</span><span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Update the API."</span><span class="p">}),</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>            <span class="s2">"frontend"</span><span class="p">:</span> <span class="n">MergePlanRun</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">{</span><span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Update the client."</span><span class="p">}),</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            <span class="s2">"integrate"</span><span class="p">:</span> <span class="n">MergePlanRun</span><span class="p">(</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>                <span class="nb">input</span><span class="o">=</span><span class="p">{</span><span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Verify the combined changes and run the release tests."</span><span class="p">},</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>                <span class="n">needs</span><span class="o">=</span><span class="p">(</span><span class="s2">"backend"</span><span class="p">,</span> <span class="s2">"frontend"</span><span class="p">),</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>            <span class="p">),</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="p">},</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="n">submission_key</span><span class="o">=</span><span class="s2">"checkout-release-1"</span><span class="p">,</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="p">)</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">HostedTarget</span><span class="p">(</span><span class="s2">"cloud"</span><span class="p">))</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        <span class="n">plan</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">submit_plan</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">plan</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">wait_timeout</span><span class="o">=</span><span class="mi">21_600</span><span class="p">)</span>
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">status</span><span class="o">.</span><span class="n">succeeded</span><span class="p">:</span>
-<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"merge plan ended as </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">delivery</span><span class="o">=</span><span class="s2">"merge"</span><span class="p">,</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="n">expires_at</span><span class="o">=</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="n">runs</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>            <span class="s2">"backend"</span><span class="p">:</span> <span class="n">StackRun</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">{</span><span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Update the API."</span><span class="p">}),</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            <span class="s2">"frontend"</span><span class="p">:</span> <span class="n">StackRun</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="p">{</span><span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Update the client."</span><span class="p">}),</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>            <span class="s2">"integrate"</span><span class="p">:</span> <span class="n">StackRun</span><span class="p">(</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>                <span class="nb">input</span><span class="o">=</span><span class="p">{</span><span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Verify the combined changes and run the release tests."</span><span class="p">},</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>                <span class="n">needs</span><span class="o">=</span><span class="p">(</span><span class="s2">"backend"</span><span class="p">,</span> <span class="s2">"frontend"</span><span class="p">),</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            <span class="p">),</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="p">},</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="n">submission_key</span><span class="o">=</span><span class="s2">"checkout-release-1"</span><span class="p">,</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="p">)</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">HostedTarget</span><span class="p">(</span><span class="s2">"platform"</span><span class="p">))</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="n">stack</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">submit_stack</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>        <span class="n">status</span> <span class="o">=</span> <span class="k">await</span> <span class="n">stack</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">wait_timeout</span><span class="o">=</span><span class="mi">21_600</span><span class="p">)</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">status</span><span class="o">.</span><span class="n">succeeded</span><span class="p">:</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"stack ended as </span><span class="si">{</span><span class="n">status</span><span class="o">.</span><span class="n">state</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
-<p>Submission is atomic, and every node receives a stable run ID. <code>needs</code> gates readiness only; plan
-nodes have no output interpolation or shared mutable input. After dependencies merge, Cloud
-materializes the node against an exact source revision. When materialization completes, <code>readyAt</code>
-is set and the node's queue deadline is the earlier of plan expiry and seven days after <code>readyAt</code>.
-A merge conflict is repaired by the conflicting run itself in the same checkout and delivery loop.
-A descendant cannot repair a failed predecessor; it ends as <code>dependency_failed</code>. The v1 API has no
-aggregate event stream, so <code>MergePlan.watch()</code> polls and yields changed snapshots.</p>
+<p>With a pull-request delivery profile and <code>delivery="stacked_pull_requests"</code>, the same runs become
+the chain <code>backend</code>, <code>frontend</code>, <code>integrate</code>: three pull requests, each targeting the branch of the
+one before it.</p>
+<p>Submission is atomic, and every run receives a stable run ID. <code>needs</code> gates readiness only; stack
+runs have no output interpolation or shared mutable input. Once its dependencies are delivered,
+Platform materializes the run against an exact source branch and revision. When materialization
+completes, <code>readyAt</code> is set and the run's queue deadline is the earlier of stack expiry and seven
+days after <code>readyAt</code>. With merge delivery, a merge conflict is repaired by the conflicting run
+itself in the same checkout and delivery loop. A descendant cannot repair a failed predecessor; it
+ends as <code>dependency_failed</code>. The v1 API has no aggregate event stream, so <code>Stack.watch()</code> polls and
+yields changed snapshots. <a href="../stacks/">Submit a stack</a> covers delivery modes and reviewing a stacked
+pull-request chain.</p>
 <h2 id="pass-exact-protocol-documents">Pass exact protocol documents<a class="headerlink" href="#pass-exact-protocol-documents" title="Permanent link">&para;</a></h2>
 <p><code>GraphSpec</code> and <code>RuntimePlan</code> wrap exact JSON mappings without loss. Python neither copies the Rust
 schemas nor applies its own semantic checks:</p>
@@ -1946,7 +2192,7 @@ the same preflight as the CLI.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    Last updated <time datetime="2026-10-15">15 October 2026</time>
+    Last updated <time datetime="2026-11-05">5 November 2026</time>
   </span>
 
     
@@ -2084,7 +2330,7 @@ the same preflight as the CLI.</p>
       
       
     
-    <a href="https://x.com/OpenEngineHQ" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+    <a href="https://x.com/OpenEngineCo" target="_blank" rel="noopener" title="x.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
     </a>
   

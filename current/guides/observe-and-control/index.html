@@ -6,14 +6,14 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Versioned documentation for the Zeroshot CLI, protocol, and Python SDK">
+        <meta name="description" content="Observe durable run state in the browser or CLI, inspect node transcripts, reconnect to a run and stop work without changing its history.">
       
       
       
         <link rel="canonical" href="https://zeroshot.sh/docs/current/guides/observe-and-control/">
       
       
-        <link rel="prev" href="../review-loop/">
+        <link rel="prev" href="../stacks/">
       
       
         <link rel="next" href="../acp/">
@@ -45,15 +45,11 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spline+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Spline Sans";--md-code-font:"Roboto Mono"}</style>
-      
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/fonts/fonts.css">
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
@@ -63,6 +59,28 @@
 
     
     
+  
+  
+    
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="zeroshot">
+    <meta property="og:title" content="Observe and control runs | zeroshot docs">
+    <meta property="og:description" content="Observe durable run state in the browser or CLI, inspect node transcripts, reconnect to a run and stop work without changing its history.">
+    <meta property="og:url" content="https://zeroshot.sh/docs/current/guides/observe-and-control/">
+    <meta property="og:image" content="https://zeroshot.sh/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Observe and control runs | zeroshot docs">
+    <meta name="twitter:description" content="Observe durable run state in the browser or CLI, inspect node transcripts, reconnect to a run and stop work without changing its history.">
+    <meta name="twitter:image" content="https://zeroshot.sh/og.jpg">
+    
+      
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/", "name": "zeroshot docs", "position": 1}, {"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/guides/observe-and-control/", "name": "Observe and control runs", "position": 2}]}</script>
+    
+  
+
   </head>
   
   
@@ -581,6 +599,18 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -633,6 +663,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan work before running it
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../runtime-environments/" class="md-nav__link">
         
   
@@ -661,6 +719,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../active-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../review-loop/" class="md-nav__link">
         
   
@@ -669,6 +755,118 @@
     
   
     Build a review loop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review an issue or PR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review a PR in depth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forge-delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub and GitLab delivery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Submit a stack
   
 
     
@@ -1515,6 +1713,8 @@
       
         
       
+        
+      
     
     
     
@@ -1644,6 +1844,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/harness-adapters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness adapters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1658,14 +1886,14 @@
   
   
     <li class="md-nav__item">
-      <a href="https://cloud.zeroshot.sh/docs" class="md-nav__link">
+      <a href="https://app.zeroshot.sh/docs" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Zeroshot Cloud
+    Zeroshot Platform
   
 
     
@@ -1844,7 +2072,7 @@ leaves the run active.</p>
 return after submission:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">zeroshot run \</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">  --title "Update parser" \</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">  --template software-change \</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">  --template software-change --delivery none \</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">  --input input.json \</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="go">  --uniform-runtime-config runtime.json \</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">  --detach</span>
@@ -1856,7 +2084,8 @@ return after submission:</p>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">zeroshot status RUN_ID</span>
 </code></pre></div>
 <p>A run ID belongs to the controller or target that created it. Pass <code>--target NAME</code> when reading one
-from a named target.</p>
+from a named target. Finished status separates graph-authored <code>terminalResult.output</code> from optional
+runtime-confirmed <code>metadata.deliveryReceipt</code>; graphs without delivery omit the receipt.</p>
 <h2 id="resume-event-and-log-streams">Resume event and log streams<a class="headerlink" href="#resume-event-and-log-streams" title="Permanent link">&para;</a></h2>
 <p><code>watch</code> follows status events; <code>logs</code> follows safe provider and controller log records. Both accept
 an opaque cursor and resume strictly after it:</p>
@@ -1865,6 +2094,11 @@ an opaque cursor and resume strictly after it:</p>
 </code></pre></div>
 <p>Cursors are opaque, so store the last fully consumed value and pass it back unchanged.
 <code>logs --execution EXECUTION_REF</code> restricts output to one execution selector from status.</p>
+<p><code>watch</code> exits 0 when the run succeeded. When the run finished failed, it prints the same failure
+summary on stderr as a failed foreground <code>run</code> and exits 1, so a script can start a run with
+<code>--detach</code> and wait for its result with <code>zeroshot watch RUN_ID</code>. <code>logs</code> exits 0 when its stream
+ends, whatever the run's result. The <a href="../../zeroshot-cli/">CLI reference</a> lists the exit status of
+<code>run</code>, <code>watch</code> and <code>logs</code>.</p>
 <p>The producer records each log timestamp as a positive JavaScript-safe Unix epoch millisecond, and
 durable replay preserves it.</p>
 <h2 id="attach-to-an-active-execution">Attach to an active execution<a class="headerlink" href="#attach-to-an-active-execution" title="Permanent link">&para;</a></h2>
@@ -1893,11 +2127,22 @@ token usage. Selecting a checkpoint replaces later workspace edits, including un
 files. Restart restores the latest completed snapshot and starts the graph at its root. A sudden
 target loss can precede the next snapshot boundary, so the last writer may run again. Local workspaces
 must be idle while they are restored.</p>
+<p>A local resume restores the snapshot before any agent starts. That preparation may take up to 10
+minutes. For larger workspaces or slower disks, set <code>ZEROSHOT_PREPARATION_TIMEOUT</code> to a whole number
+of seconds from 1 to 86400 before <code>zeroshot resume</code>. When a restore fails, or its extraction reaches
+that deadline, the error names the step that stopped and its elapsed time. Replacing the workspace
+files, once started, is allowed to finish. If it is still running 30 seconds after the deadline,
+the resume is stopped with an error that names the deadline. Either way the run stays recoverable.</p>
+<p>A restore never changes the checkout before the complete snapshot is extracted. If a crash
+interrupts it while it replaces files, the checkout can stay partially restored. The next
+<code>zeroshot resume</code> then removes the interrupted staging copy beside the workspace. It finishes the
+restore with the same or another checkpoint before any agent runs. A resume that would start
+without restoring a snapshot is refused until a restore completes.</p>
 <p>Local and Docker targets deduplicate checkpoints in a private Restic repository beside their run
 storage and advertise <code>openengine.workspace-checkpoints/v1</code>. They retain that repository only for a
-failed recovery lineage and delete it after a successful run. Cloud exposes recovery through
+failed recovery lineage and delete it after a successful run. Platform exposes recovery through
 authenticated hosted run routes, so failed-run checkpoints remain available for 30 days after the
-original capsule is removed. Cloud resolves declared connections from their original references.
+original capsule is removed. Platform resolves declared connections from their original references.
 Direct-target resume reuses the original source connection authorization and resolves fresh values;
 export <code>GH_TOKEN</code> again when the run uses it for checkout or GitHub delivery.</p>
 <h2 id="stop-only-with-explicit-intent">Stop only with explicit intent<a class="headerlink" href="#stop-only-with-explicit-intent" title="Permanent link">&para;</a></h2>
@@ -1928,7 +2173,7 @@ status first if another operator may already have stopped the run, or if it may 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    Last updated <time datetime="2026-10-15">15 October 2026</time>
+    Last updated <time datetime="2026-11-08">8 November 2026</time>
   </span>
 
     
@@ -1964,7 +2209,7 @@ status first if another operator may already have stopped the run, or if it may 
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../review-loop/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Build a review loop">
+          <a href="../stacks/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Submit a stack">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1974,7 +2219,7 @@ status first if another operator may already have stopped the run, or if it may 
                 Previous
               </span>
               <div class="md-ellipsis">
-                Build a review loop
+                Submit a stack
               </div>
             </div>
           </a>
@@ -2066,7 +2311,7 @@ status first if another operator may already have stopped the run, or if it may 
       
       
     
-    <a href="https://x.com/OpenEngineHQ" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+    <a href="https://x.com/OpenEngineCo" target="_blank" rel="noopener" title="x.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
     </a>
   

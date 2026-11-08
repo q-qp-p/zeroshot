@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Versioned documentation for the Zeroshot CLI, protocol, and Python SDK">
+        <meta name="description" content="Choose each agent node's harness, provider and model, and supply credentials through connections separately from the graph.">
       
       
       
@@ -45,15 +45,11 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spline+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Spline Sans";--md-code-font:"Roboto Mono"}</style>
-      
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/fonts/fonts.css">
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
@@ -63,6 +59,28 @@
 
     
     
+  
+  
+    
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="zeroshot">
+    <meta property="og:title" content="Runtimes and connections | zeroshot docs">
+    <meta property="og:description" content="Choose each agent node&#39;s harness, provider and model, and supply credentials through connections separately from the graph.">
+    <meta property="og:url" content="https://zeroshot.sh/docs/current/concepts/runtimes-and-connections/">
+    <meta property="og:image" content="https://zeroshot.sh/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Runtimes and connections | zeroshot docs">
+    <meta name="twitter:description" content="Choose each agent node&#39;s harness, provider and model, and supply credentials through connections separately from the graph.">
+    <meta name="twitter:image" content="https://zeroshot.sh/og.jpg">
+    
+      
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/", "name": "zeroshot docs", "position": 1}, {"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/concepts/runtimes-and-connections/", "name": "Runtimes and connections", "position": 2}]}</script>
+    
+  
+
   </head>
   
   
@@ -610,6 +628,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#microsoft-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft Foundry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#renewable-local-github-delivery-credentials" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -694,6 +723,18 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -746,6 +787,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan work before running it
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/runtime-environments/" class="md-nav__link">
         
   
@@ -774,6 +843,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/active-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/review-loop/" class="md-nav__link">
         
   
@@ -782,6 +879,118 @@
     
   
     Build a review loop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review an issue or PR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/code-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review a PR in depth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/forge-delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub and GitLab delivery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Submit a stack
   
 
     
@@ -1504,6 +1713,8 @@
       
         
       
+        
+      
     
     
     
@@ -1633,6 +1844,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/harness-adapters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness adapters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1647,14 +1886,14 @@
   
   
     <li class="md-nav__item">
-      <a href="https://cloud.zeroshot.sh/docs" class="md-nav__link">
+      <a href="https://app.zeroshot.sh/docs" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Zeroshot Cloud
+    Zeroshot Platform
   
 
     
@@ -1765,6 +2004,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#microsoft-foundry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft Foundry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#renewable-local-github-delivery-credentials" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1815,7 +2065,7 @@ rule.</p>
 <h2 id="four-explicit-choices">Four explicit choices<a class="headerlink" href="#four-explicit-choices" title="Permanent link">&para;</a></h2>
 <p>Each agent node uses:</p>
 <ol>
-<li>a <strong>harness</strong>, <code>codex</code>, <code>claude</code>, <code>copilot</code>, or <code>pi</code>;</li>
+<li>a <strong>harness</strong> enabled by the host;</li>
 <li>a <strong>provider</strong> supported by that harness;</li>
 <li>an opaque provider-owned <strong>model</strong> identifier;</li>
 <li>zero or more named <strong>connections</strong>, each declaring exact environment field names.</li>
@@ -1825,11 +2075,10 @@ rule.</p>
 <a href="../../reference/runtime-plan/#per-node-lanes"><code>lane</code></a>, for example to have Codex implement and
 Claude Code review. Zeroshot starts one harness adapter per distinct effective lane, and each node
 runs on its own lane's CLI. Model and connections are always chosen per node.</p>
-<p>The <a href="../../reference/runtime-plan/#harness-and-provider">RuntimePlan reference</a> lists the accepted
+<p><a href="../../project/harness-adapters/">Harness adapters</a> lists available adapters and accepted
 harness/provider pairs, which apply to the default lane and to every node's lane. Admission rejects
-known-incompatible pairs, such as <code>codex</code> with <code>anthropic</code>, <code>claude</code> with <code>openai</code>, and <code>pi</code> with
-<code>github</code>. Zeroshot does not check current provider availability, and model names remain
-provider-owned.</p>
+known-incompatible pairs, such as <code>codex</code> with <code>anthropic</code> and <code>claude</code> with <code>openai</code>. Zeroshot
+does not check current provider availability, and model names remain provider-owned.</p>
 <h2 id="uniform-and-exact-plans">Uniform and exact plans<a class="headerlink" href="#uniform-and-exact-plans" title="Permanent link">&para;</a></h2>
 <p><code>--uniform-runtime-config</code> expands one agent binding across all executable nodes, which keeps a
 built-in template configuration short:</p>
@@ -1858,10 +2107,9 @@ session; see <a href="../../reference/runtime-plan/#agent">session scope</a>.</p
 <p>The submission environment or a target-owned connection store supplies the values. Zeroshot keeps
 them out of the graph, runtime JSON, run ledger, and observation records.</p>
 <p>When <code>connections</code> is omitted, Zeroshot materializes provider access for each node from its
-effective lane and the selected execution placement. On a local run, nodes on the <code>codex</code>/<code>openai</code>,
-<code>claude</code>/<code>anthropic</code>, <code>copilot</code>/<code>github</code>, <code>pi</code>/<code>anthropic</code>, and <code>pi</code>/<code>openai</code> lanes reuse the
-harness's native login and configuration without inventing a connection. On a contained target, or
-on any non-native provider lane, a node receives these canonical requirements:</p>
+effective lane and the selected execution placement. Local adapters can reuse native authentication as described in
+<a href="../../project/harness-adapters/">Harness adapters</a>. Lanes requiring a connection and contained targets
+receive these canonical requirements:</p>
 <table>
 <thead>
 <tr>
@@ -1897,13 +2145,18 @@ on any non-native provider lane, a node receives these canonical requirements:</
 <td><code>AWS_BEARER_TOKEN_BEDROCK</code>, <code>AWS_REGION</code></td>
 </tr>
 <tr>
+<td><code>foundry</code></td>
+<td><code>foundry</code></td>
+<td><code>AZURE_FOUNDRY_API_KEY</code>, <code>AZURE_FOUNDRY_RESOURCE</code></td>
+</tr>
+<tr>
 <td><code>github</code></td>
 <td><code>github</code></td>
 <td><code>COPILOT_GITHUB_TOKEN</code></td>
 </tr>
 </tbody>
 </table>
-<p>A <code>pi</code> gateway run additionally requires <code>GATEWAY_API</code>, which names the wire protocol
+<p>Pi, Copilot, OpenCode and Hermes gateway runs additionally require <code>GATEWAY_API</code>, which names the wire protocol
 (<code>openai-responses</code>, <code>openai-completions</code>, or <code>anthropic-messages</code>). The Codex and Claude gateway
 lanes do not use it.</p>
 <p>A run's connection requirements are the union over its nodes. A contained run with a Codex/OpenAI
@@ -1926,8 +2179,12 @@ servers through runtime connections.</p>
 updating a multi-field connection. <code>connection list</code> reports names and kind but never values.</p>
 <p>Hosted targets can also own user- or organization-scoped connections. Setup and dynamic connection
 kinds depend on the target; Zeroshot consumes only the resolved fields declared by the runtime.</p>
+<p>Source delivery selects its own credentials independently of agent model providers. GitHub uses
+<code>GH_TOKEN</code>; GitLab uses <code>GITLAB_TOKEN</code>. Local delivery can reuse the selected host's native
+<code>gh</code> or <code>glab</code> login. See <a href="../../guides/forge-delivery/">forge delivery setup</a> for explicit instances,
+Git transport credentials, and target connection examples.</p>
 <h2 id="gateways">Gateways<a class="headerlink" href="#gateways" title="Permanent link">&para;</a></h2>
-<p>Use <code>provider: "gateway"</code> with <code>codex</code>, <code>claude</code>, or <code>pi</code> and the gateway's model identifier:</p>
+<p>To use a gateway, set <code>provider: "gateway"</code> and use the gateway's model identifier:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"harness"</span><span class="p">:</span><span class="w"> </span><span class="s2">"codex"</span><span class="p">,</span><span class="w"> </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gateway"</span><span class="p">,</span><span class="w"> </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PROVIDER_MODEL_ID"</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <p>Store the endpoint and key together through the existing connection command:</p>
@@ -1935,8 +2192,8 @@ kinds depend on the target; Zeroshot consumes only the resolved fields declared 
 </code></pre></div>
 <p>Codex requires the OpenAI <strong>Responses API</strong>, including streaming and tool calls; Chat Completions
 alone is insufficient. It sends the key as a bearer token. Claude requires the Anthropic <strong>Messages
-API</strong> and sends the key in <code>x-api-key</code>. The <code>pi</code> gateway lane lets the caller name the wire protocol
-in <code>GATEWAY_API</code> and reaches any endpoint Pi implements without probing it; an unrecognized value
+API</strong> and sends the key in <code>x-api-key</code>. The Pi, Copilot, OpenCode and Hermes gateway lanes let the caller name the wire protocol
+in <code>GATEWAY_API</code> and use the selected native transport without probing it; an unrecognized value
 fails before launch. The selected gateway/model must support the harness's
 requests, including structured output. Zeroshot does not probe capabilities or translate protocols.</p>
 <p>Supply the base URL expected by the selected harness, including any gateway path prefix. Zeroshot
@@ -1944,6 +2201,22 @@ preserves that path. For OpenRouter, use <code>https://openrouter.ai/api/v1</cod
 <code>https://openrouter.ai/api</code> with Claude. Base URLs must use HTTP(S) and cannot contain embedded
 credentials, query parameters, or fragments. Both fields remain connection values, outside runtime
 JSON and run history. Exact plans declare these fields under any chosen connection key.</p>
+<h2 id="microsoft-foundry">Microsoft Foundry<a class="headerlink" href="#microsoft-foundry" title="Permanent link">&para;</a></h2>
+<p>The <code>codex</code> and <code>claude</code> harnesses reach models deployed in a Microsoft Foundry resource with
+<code>provider: "foundry"</code>. The model is the Foundry deployment name:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"harness"</span><span class="p">:</span><span class="w"> </span><span class="s2">"claude"</span><span class="p">,</span><span class="w"> </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foundry"</span><span class="p">,</span><span class="w"> </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FOUNDRY_DEPLOYMENT_NAME"</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Store the API key with the resource name:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">zeroshot connection set foundry --field AZURE_FOUNDRY_API_KEY --field AZURE_FOUNDRY_RESOURCE</span>
+</code></pre></div>
+<p>For a custom domain, declare <code>AZURE_FOUNDRY_BASE_URL</code> instead of <code>AZURE_FOUNDRY_RESOURCE</code>, set to
+the resource root without an API path. Exactly one of the two must be present. Claude Code runs in its
+native Foundry mode against <code>https://RESOURCE.services.ai.azure.com/anthropic</code>, or the root URL
+followed by <code>/anthropic</code>. Codex uses the Azure OpenAI v1 Responses API at
+<code>https://RESOURCE.openai.azure.com/openai/v1</code>, or the root URL followed by <code>/openai/v1</code>, and sends the
+key in the <code>api-key</code> header. One connection therefore serves a run that mixes Codex and Claude nodes
+on the same resource. Foundry lanes accept API keys only; Microsoft Entra ID authentication is not
+supported.</p>
 <p>Docker runtimes can prepare shared tools, project dependencies, and services with setup and
 startup hooks. See <a href="../../guides/runtime-environments/">Prepare a runtime environment</a> for the
 installation conventions, resume behavior, and direct-target ownership boundary.</p>
@@ -1988,7 +2261,7 @@ resume selects the caller's current executable again.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    Last updated <time datetime="2026-10-18">18 October 2026</time>
+    Last updated <time datetime="2026-11-02">2 November 2026</time>
   </span>
 
     
@@ -2126,7 +2399,7 @@ resume selects the caller's current executable again.</p>
       
       
     
-    <a href="https://x.com/OpenEngineHQ" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+    <a href="https://x.com/OpenEngineCo" target="_blank" rel="noopener" title="x.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
     </a>
   

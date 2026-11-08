@@ -23,6 +23,28 @@
       ],
       "type": "object"
     },
+    "ActiveMemoryConfig": {
+      "additionalProperties": false,
+      "description": "Retrieval controls. Repository cards and procedural graph guidance are independent.",
+      "properties": {
+        "budgetBytes": {
+          "default": 2048,
+          "format": "uint32",
+          "maximum": 16384,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "graph": {
+          "default": true,
+          "type": "boolean"
+        },
+        "repository": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "AdmissionTransition": {
       "additionalProperties": false,
       "properties": {
@@ -419,15 +441,6 @@
       ],
       "type": "object"
     },
-    "ClaudeProvider": {
-      "enum": [
-        "anthropic",
-        "openrouter",
-        "gateway",
-        "bedrock"
-      ],
-      "type": "string"
-    },
     "ClusterStatus": {
       "properties": {
         "atCursor": {
@@ -469,14 +482,28 @@
       ],
       "type": "object"
     },
-    "CodexProvider": {
-      "enum": [
-        "openai",
-        "openrouter",
-        "gateway",
-        "bedrock"
+    "CommitIdentity": {
+      "additionalProperties": false,
+      "description": "A host-selected Git author and committer for commits created by delivery. Each value has at\nmost 256 UTF-8 bytes, no control characters, `<` or `>`, and at least one character that Git\nkeeps after trimming whitespace and `.,:;\"'\\`.",
+      "properties": {
+        "email": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F<>]*[^\\s\\u0000-\\u001F\\u007F-\\u009F<>.,:;\"'\\\\][^\\u0000-\\u001F\\u007F-\\u009F<>]*$",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F<>]*[^\\s\\u0000-\\u001F\\u007F-\\u009F<>.,:;\"'\\\\][^\\u0000-\\u001F\\u007F-\\u009F<>]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email"
       ],
-      "type": "string"
+      "type": "object"
     },
     "ControlSelector": {
       "additionalProperties": false,
@@ -511,12 +538,6 @@
         "signal",
         "error",
         "group"
-      ],
-      "type": "string"
-    },
-    "CopilotProvider": {
-      "enum": [
-        "github"
       ],
       "type": "string"
     },
@@ -573,6 +594,17 @@
           "type": "object"
         }
       ]
+    },
+    "DecisionApi": {
+      "enum": [
+        "systemone"
+      ],
+      "type": "string"
+    },
+    "DecisionProbability": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
     },
     "DeclaredConnections": {
       "additionalProperties": {
@@ -1014,6 +1046,20 @@
           "type": "object"
         }
       ]
+    },
+    "GlobalAgentsConfig": {
+      "additionalProperties": false,
+      "description": "Only product-owned global agents can be configured. Additional keys are rejected.",
+      "properties": {
+        "postmortem": {
+          "$ref": "#/$defs/PostmortemConfig",
+          "default": {
+            "enabled": true,
+            "timeoutMs": 120000
+          }
+        }
+      },
+      "type": "object"
     },
     "GraphDiagnostic": {
       "additionalProperties": false,
@@ -1796,6 +1842,23 @@
           "type": "object"
         }
       ]
+    },
+    "HarnessConfiguration": {
+      "additionalProperties": false,
+      "description": "Secret-free native configuration, at most 65536 encoded bytes. Supported carriers and reserved controls belong to the selected harness.",
+      "properties": {
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "options": {
+          "additionalProperties": true,
+          "type": "object"
+        }
+      },
+      "type": "object"
     },
     "InitializeParams": {
       "additionalProperties": false,
@@ -3504,6 +3567,16 @@
             "connections": {
               "$ref": "#/$defs/DeclaredConnections"
             },
+            "contextWindow": {
+              "description": "Caller-owned model context window. Absent means the harness provider's own default.",
+              "format": "uint32",
+              "maximum": 10000000,
+              "minimum": 1,
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "effort": {
               "anyOf": [
                 {
@@ -3513,6 +3586,17 @@
                   "type": "null"
                 }
               ]
+            },
+            "harnessConfig": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/HarnessConfiguration"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Secret-free native options owned by this node's effective harness."
             },
             "kind": {
               "const": "agent",
@@ -3528,6 +3612,16 @@
                 }
               ]
             },
+            "maxTokens": {
+              "description": "Caller-owned model output limit. Absent means the harness provider's own default.",
+              "format": "uint32",
+              "maximum": 10000000,
+              "minimum": 1,
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
             "model": {
               "maxLength": 2048,
               "minLength": 1,
@@ -3540,6 +3634,80 @@
           "required": [
             "kind",
             "model"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "command": {
+              "$ref": "#/$defs/ScriptCommand"
+            },
+            "connections": {
+              "$ref": "#/$defs/DeclaredConnections"
+            },
+            "kind": {
+              "const": "script",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "command"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "api": {
+              "$ref": "#/$defs/DecisionApi"
+            },
+            "connections": {
+              "$ref": "#/$defs/DeclaredConnections"
+            },
+            "kind": {
+              "const": "decision",
+              "type": "string"
+            },
+            "minProbability": {
+              "$ref": "#/$defs/DecisionProbability"
+            },
+            "model": {
+              "maxLength": 2048,
+              "minLength": 1,
+              "type": "string"
+            },
+            "uncertainLabel": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "api",
+            "model",
+            "minProbability",
+            "uncertainLabel",
+            "connections"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "connections": {
+              "$ref": "#/$defs/DeclaredConnections"
+            },
+            "kind": {
+              "const": "comment_delivery",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
           ],
           "type": "object"
         },
@@ -3807,17 +3975,6 @@
       ],
       "type": "string"
     },
-    "PiProvider": {
-      "description": "Provider lanes owned by the Pi harness.\n\nEach variant names one Pi provider whose credentials resolve through a named connection. Pi\nowns the wire behavior of every lane; this enum only selects which lane the adapter\nconfigures and which requirements admission materializes.",
-      "enum": [
-        "anthropic",
-        "openai",
-        "openrouter",
-        "gateway",
-        "bedrock"
-      ],
-      "type": "string"
-    },
     "PlanParams": {
       "additionalProperties": false,
       "properties": {
@@ -3882,6 +4039,33 @@
         "deny"
       ],
       "type": "string"
+    },
+    "PostmortemConfig": {
+      "additionalProperties": false,
+      "description": "The postmortem inherits one real agent node's model, lane and declared connections.\nOmission selects the first worker in graph order, then the first agent verifier.",
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "sourceNode": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timeoutMs": {
+          "default": 120000,
+          "format": "uint32",
+          "maximum": 600000,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
     },
     "PullRequestFeedback": {
       "enum": [
@@ -4567,8 +4751,11 @@
     },
     "RunMetadata": {
       "additionalProperties": false,
-      "description": "Additive metadata emitted only with a terminal run projection.",
+      "description": "Runtime-owned metadata accompanying terminal status and retained run history.",
       "properties": {
+        "deliveryReceipt": {
+          "description": "Confirmed native delivery evidence, independent of the graph's terminal output."
+        },
         "tokenUsage": {
           "anyOf": [
             {
@@ -4620,6 +4807,17 @@
     "RunResumeParams": {
       "additionalProperties": false,
       "properties": {
+        "commitIdentity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CommitIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Author and committer of every commit the successor's delivery creates. Omission keeps the\ntarget's default delivery identity."
+        },
         "connectionResolver": {
           "anyOf": [
             {
@@ -4703,7 +4901,9 @@
       "enum": [
         "small",
         "medium",
-        "large"
+        "large",
+        "xl",
+        "gpu_t4"
       ],
       "type": "string"
     },
@@ -5043,205 +5243,83 @@
       "type": "object"
     },
     "RuntimeLane": {
-      "description": "One harness and provider pair: the run-level default, or an agent node's override.",
-      "oneOf": [
-        {
-          "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "copilot",
-              "type": "string"
-            },
-            "provider": {
-              "$ref": "#/$defs/CopilotProvider"
-            }
-          },
-          "required": [
-            "harness",
-            "provider"
-          ],
-          "type": "object"
+      "additionalProperties": false,
+      "description": "One opaque harness/provider pair. Installed adapters own compatibility and execution policy.",
+      "properties": {
+        "harness": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
         },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "codex",
-              "type": "string"
-            },
-            "provider": {
-              "$ref": "#/$defs/CodexProvider"
-            }
-          },
-          "required": [
-            "harness",
-            "provider"
-          ],
-          "type": "object"
-        },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "claude",
-              "type": "string"
-            },
-            "provider": {
-              "$ref": "#/$defs/ClaudeProvider"
-            }
-          },
-          "required": [
-            "harness",
-            "provider"
-          ],
-          "type": "object"
-        },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "pi",
-              "type": "string"
-            },
-            "provider": {
-              "$ref": "#/$defs/PiProvider"
-            }
-          },
-          "required": [
-            "harness",
-            "provider"
-          ],
-          "type": "object"
+        "provider": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
         }
-      ]
+      },
+      "required": [
+        "harness",
+        "provider"
+      ],
+      "type": "object"
     },
     "RuntimePlan": {
-      "oneOf": [
-        {
+      "additionalProperties": false,
+      "description": "Portable runtime selection. Compatibility belongs to the host's installed harness registry.",
+      "properties": {
+        "activeMemory": {
+          "$ref": "#/$defs/ActiveMemoryConfig"
+        },
+        "globalAgents": {
+          "$ref": "#/$defs/GlobalAgentsConfig"
+        },
+        "harness": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        },
+        "nodes": {
           "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "copilot",
-              "type": "string"
-            },
-            "nodes": {
-              "additionalProperties": false,
-              "patternProperties": {
-                "^[A-Za-z_][A-Za-z0-9_.-]*$": {
-                  "$ref": "#/$defs/NodeRuntimeBinding"
-                }
-              },
-              "type": "object"
-            },
-            "provider": {
-              "$ref": "#/$defs/CopilotProvider"
-            },
-            "size": {
-              "$ref": "#/$defs/RunSize"
+          "patternProperties": {
+            "^[A-Za-z_][A-Za-z0-9_.-]*$": {
+              "$ref": "#/$defs/NodeRuntimeBinding"
             }
           },
-          "required": [
-            "harness",
-            "provider",
-            "size",
-            "nodes"
-          ],
           "type": "object"
         },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "codex",
-              "type": "string"
-            },
-            "nodes": {
-              "additionalProperties": false,
-              "patternProperties": {
-                "^[A-Za-z_][A-Za-z0-9_.-]*$": {
-                  "$ref": "#/$defs/NodeRuntimeBinding"
-                }
-              },
-              "type": "object"
-            },
-            "provider": {
-              "$ref": "#/$defs/CodexProvider"
-            },
-            "size": {
-              "$ref": "#/$defs/RunSize"
-            }
-          },
-          "required": [
-            "harness",
-            "provider",
-            "size",
-            "nodes"
-          ],
-          "type": "object"
+        "provider": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
         },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "claude",
-              "type": "string"
-            },
-            "nodes": {
-              "additionalProperties": false,
-              "patternProperties": {
-                "^[A-Za-z_][A-Za-z0-9_.-]*$": {
-                  "$ref": "#/$defs/NodeRuntimeBinding"
-                }
-              },
-              "type": "object"
-            },
-            "provider": {
-              "$ref": "#/$defs/ClaudeProvider"
-            },
-            "size": {
-              "$ref": "#/$defs/RunSize"
-            }
-          },
-          "required": [
-            "harness",
-            "provider",
-            "size",
-            "nodes"
-          ],
-          "type": "object"
+        "size": {
+          "$ref": "#/$defs/RunSize"
         },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "harness": {
-              "const": "pi",
-              "type": "string"
-            },
-            "nodes": {
-              "additionalProperties": false,
-              "patternProperties": {
-                "^[A-Za-z_][A-Za-z0-9_.-]*$": {
-                  "$ref": "#/$defs/NodeRuntimeBinding"
-                }
-              },
-              "type": "object"
-            },
-            "provider": {
-              "$ref": "#/$defs/PiProvider"
-            },
-            "size": {
-              "$ref": "#/$defs/RunSize"
-            }
-          },
-          "required": [
-            "harness",
-            "provider",
-            "size",
-            "nodes"
-          ],
-          "type": "object"
+        "workspaceCheckpoints": {
+          "description": "Local workspace snapshots. Run history remains durable when disabled.",
+          "type": "boolean"
         }
-      ]
+      },
+      "required": [
+        "harness",
+        "provider",
+        "size",
+        "nodes"
+      ],
+      "type": "object"
+    },
+    "ScriptCommand": {
+      "items": {
+        "maxLength": 8192,
+        "type": "string"
+      },
+      "maxItems": 128,
+      "minItems": 1,
+      "type": "array"
     },
     "ServerCapabilities": {
       "additionalProperties": false,
@@ -5288,6 +5366,16 @@
       "additionalProperties": false,
       "description": "Optional forge identity selects one registered source-code adapter.",
       "properties": {
+        "baseUrl": {
+          "description": "Canonical web base, including an optional installation path prefix.\nOmission selects the adapter's public service default when one exists.",
+          "maxLength": 2048,
+          "minLength": 8,
+          "pattern": "^https://[^\\s?#@]+$",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "provider": {
           "maxLength": 128,
           "minLength": 1,

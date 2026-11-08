@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Versioned documentation for the Zeroshot CLI, protocol, and Python SDK">
+        <meta name="description" content="Python API reference for targets, graph specifications, runtime plans, presets, run requests and hosted stack requests.">
       
       
       
@@ -45,15 +45,11 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spline+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Spline Sans";--md-code-font:"Roboto Mono"}</style>
-      
     
     
       <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../assets/fonts/fonts.css">
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
@@ -63,6 +59,28 @@
 
     
     
+  
+  
+    
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="zeroshot">
+    <meta property="og:title" content="Configuration | zeroshot docs">
+    <meta property="og:description" content="Python API reference for targets, graph specifications, runtime plans, presets, run requests and hosted stack requests.">
+    <meta property="og:url" content="https://zeroshot.sh/docs/current/reference/python/configuration/">
+    <meta property="og:image" content="https://zeroshot.sh/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Configuration | zeroshot docs">
+    <meta name="twitter:description" content="Python API reference for targets, graph specifications, runtime plans, presets, run requests and hosted stack requests.">
+    <meta name="twitter:image" content="https://zeroshot.sh/og.jpg">
+    
+      
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/", "name": "zeroshot docs", "position": 1}, {"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/reference/python/configuration/", "name": "Configuration", "position": 2}]}</script>
+    
+  
+
   </head>
   
   
@@ -579,6 +597,18 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -631,6 +661,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../guides/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan work before running it
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../guides/runtime-environments/" class="md-nav__link">
         
   
@@ -659,6 +717,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../guides/active-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../guides/review-loop/" class="md-nav__link">
         
   
@@ -667,6 +753,118 @@
     
   
     Build a review loop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review an issue or PR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/code-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review a PR in depth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/forge-delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub and GitLab delivery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Submit a stack
   
 
     
@@ -1069,6 +1267,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#zeroshot.StackDelivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;StackDelivery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#zeroshot.JsonValue" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1241,19 +1450,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRequest" class="md-nav__link">
+  <a href="#zeroshot.StackRequest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MergePlanRequest
+        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;StackRequest
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MergePlanRequest">
+    <nav class="md-nav" aria-label=" StackRequest">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRequest.to_dict" class="md-nav__link">
+  <a href="#zeroshot.StackRequest.to_dict" class="md-nav__link">
     <span class="md-ellipsis">
       
         <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
@@ -1269,19 +1478,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRun" class="md-nav__link">
+  <a href="#zeroshot.StackRun" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MergePlanRun
+        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;StackRun
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MergePlanRun">
+    <nav class="md-nav" aria-label=" StackRun">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRun.to_dict" class="md-nav__link">
+  <a href="#zeroshot.StackRun.to_dict" class="md-nav__link">
     <span class="md-ellipsis">
       
         <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
@@ -1690,6 +1899,8 @@
       
         
       
+        
+      
     
     
     
@@ -1819,6 +2030,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/harness-adapters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness adapters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1833,14 +2072,14 @@
   
   
     <li class="md-nav__item">
-      <a href="https://cloud.zeroshot.sh/docs" class="md-nav__link">
+      <a href="https://app.zeroshot.sh/docs" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Zeroshot Cloud
+    Zeroshot Platform
   
 
     
@@ -1922,6 +2161,17 @@
     <span class="md-ellipsis">
       
         <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;Target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zeroshot.StackDelivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;StackDelivery
       
     </span>
   </a>
@@ -2101,19 +2351,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRequest" class="md-nav__link">
+  <a href="#zeroshot.StackRequest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MergePlanRequest
+        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;StackRequest
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MergePlanRequest">
+    <nav class="md-nav" aria-label=" StackRequest">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRequest.to_dict" class="md-nav__link">
+  <a href="#zeroshot.StackRequest.to_dict" class="md-nav__link">
     <span class="md-ellipsis">
       
         <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
@@ -2129,19 +2379,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRun" class="md-nav__link">
+  <a href="#zeroshot.StackRun" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MergePlanRun
+        <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;StackRun
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MergePlanRun">
+    <nav class="md-nav" aria-label=" StackRun">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#zeroshot.MergePlanRun.to_dict" class="md-nav__link">
+  <a href="#zeroshot.StackRun.to_dict" class="md-nav__link">
     <span class="md-ellipsis">
       
         <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
@@ -2229,8 +2479,33 @@
 
 
 
+<h2 id="zeroshot.StackDelivery" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">StackDelivery</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">'merge'</span><span class="p">,</span> <span class="s1">'stacked_pull_requests'</span><span class="p">]</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
+  </span>
+
+<a href="#zeroshot.StackDelivery" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>How a hosted stack lands its runs.</p>
+<p>"merge" merges each run into the base branch before its dependents start. "stacked_pull_requests"
+orders the runs into one linear stack and opens each pull request against the previous run's
+branch without merging anything.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h2 id="zeroshot.JsonValue" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">JsonValue</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="s1">'JsonValue'</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s1">'JsonValue'</span><span class="p">]</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">JsonValue</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="s1">'JsonValue'</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s1">'JsonValue'</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
@@ -2464,7 +2739,7 @@ target's stored origin and login.</p>
 
 
 <h2 id="zeroshot.Preset" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">Preset</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">delivery</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'none'</span><span class="p">,</span> <span class="n">pull_request_feedback</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'consider'</span><span class="p">)</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">Preset</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">delivery</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pull_request_feedback</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'consider'</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
@@ -2492,12 +2767,12 @@ target's stored origin and login.</p>
         </li>
         <li class="doc-section-item field-body">
             <b><code>delivery</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>&#39;none&#39;</code>
+              (<code><span title="str">str</span> | None</code>, default:
+                  <code>None</code>
 )
           –
           <div class="doc-md-description">
-            <p>Native delivery selector: none, push, pull_request, or merge.</p>
+            <p>Native delivery selector. None uses the executable-owned template default.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -2569,7 +2844,7 @@ pull_request and merge delivery.</p>
     <ul>
         <li class="doc-section-item field-body">
             <b><code>document</code></b>
-              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = None | bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue']
+              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue'] | None
 
   
       module-attribute
@@ -2655,7 +2930,7 @@ pull_request and merge delivery.</p>
 
 
 <h2 id="zeroshot.UniformRuntime" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">UniformRuntime</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">harness</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">effort</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'medium'</span><span class="p">,</span> <span class="n">session_scope</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'execution'</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">UniformRuntime</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">harness</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">effort</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">context_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'medium'</span><span class="p">,</span> <span class="n">workspace_checkpoints</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">session_scope</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'execution'</span><span class="p">,</span> <span class="n">connections</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">active_memory</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">global_agents</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">harness_config</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
@@ -2678,7 +2953,7 @@ pull_request and merge delivery.</p>
               (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
-            <p>Native codex, claude, copilot, or pi harness name.</p>
+            <p>Harness identifier enabled by the selected host.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -2708,13 +2983,45 @@ pull_request and merge delivery.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
+            <b><code>context_window</code></b>
+              (<code><span title="int">int</span> | None</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional caller-declared model context window. None keeps the provider's
+own default.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>max_tokens</code></b>
+              (<code><span title="int">int</span> | None</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional caller-declared model output limit. None keeps the provider's own
+default.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
             <b><code>size</code></b>
               (<code><span title="str">str</span></code>, default:
                   <code>&#39;medium&#39;</code>
 )
           –
           <div class="doc-md-description">
-            <p>Native small, medium, or large run size.</p>
+            <p>Native small, medium, large, xl, or gpu_t4 run size, subject to target support.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>workspace_checkpoints</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>True</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Whether to capture workspace snapshots. Defaults to enabled.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -2738,6 +3045,48 @@ live session when that graph node instance runs again.</p>
             <p>Connection keys mapped to the exact environment field names their agent nodes
 need. None selects the executable-owned provider defaults; an empty mapping declares no
 connections.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>harness_config</code></b>
+              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue'] | None
+
+  
+      module-attribute
+   (zeroshot.values.JsonValue)" href="#zeroshot.JsonValue">JsonValue</a>] | None</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional secret-free native args/options for each agent binding.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>active_memory</code></b>
+              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue'] | None
+
+  
+      module-attribute
+   (zeroshot.values.JsonValue)" href="#zeroshot.JsonValue">JsonValue</a>] | None</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional native repository/graph recall and collection controls.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>global_agents</code></b>
+              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue'] | None
+
+  
+      module-attribute
+   (zeroshot.values.JsonValue)" href="#zeroshot.JsonValue">JsonValue</a>] | None</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Optional native built-in global-agent settings, including postmortem.</p>
           </div>
         </li>
     </ul>
@@ -2816,7 +3165,7 @@ connections.</p>
     <ul>
         <li class="doc-section-item field-body">
             <b><code>document</code></b>
-              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = None | bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue']
+              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue'] | None
 
   
       module-attribute
@@ -2942,7 +3291,7 @@ connections.</p>
         </li>
         <li class="doc-section-item field-body">
             <b><code>initial_input</code></b>
-              (<code><a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = None | bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue']
+              (<code><a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue'] | None
 
   
       module-attribute
@@ -3059,21 +3408,21 @@ connections.</p>
 
 
 
-<h2 id="zeroshot.MergePlanRequest" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">MergePlanRequest</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expires_at</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">runs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MergePlanRun</span><span class="p">],</span> <span class="n">submission_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+<h2 id="zeroshot.StackRequest" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">StackRequest</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delivery</span><span class="p">:</span> <span class="n">StackDelivery</span><span class="p">,</span> <span class="n">expires_at</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">runs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">StackRun</span><span class="p">],</span> <span class="n">submission_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-<a href="#zeroshot.MergePlanRequest" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#zeroshot.StackRequest" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents ">
 
 
 
-        <p>A complete merge-only DAG submitted atomically to one hosted target.</p>
+        <p>An immutable DAG of runs submitted atomically to one hosted target.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3083,7 +3432,7 @@ connections.</p>
               (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
-            <p>Human-readable immutable plan title.</p>
+            <p>Human-readable immutable stack title.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -3091,7 +3440,7 @@ connections.</p>
               (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
-            <p>Source repository in owner/name form, shared by every node.</p>
+            <p>Source repository in owner/name form, shared by every run.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -3099,7 +3448,7 @@ connections.</p>
               (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
-            <p>Source branch shared by every node.</p>
+            <p>Base branch shared by every run.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -3112,23 +3461,41 @@ declare GH_TOKEN; only the Git delivery binding can declare it.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
+            <b><code>delivery</code></b>
+              (<code><a class="autorefs autorefs-internal" title="            StackDelivery: TypeAlias = Literal['merge', 'stacked_pull_requests']
+
+  
+      module-attribute
+   (zeroshot.stacks.StackDelivery)" href="#zeroshot.StackDelivery">StackDelivery</a></code>)
+          –
+          <div class="doc-md-description">
+            <p>How the stack lands. "merge" requires exactly one
+builtin.git-delivery.merge@2 or builtin.git-delivery.merge@3 node in the profile and
+merges each run into the base branch before its dependents start; a run may need
+several others. "stacked_pull_requests" requires exactly one
+builtin.git-delivery.pr@2 node, turns the runs into one linear stack in dependency
+order with ties broken by run name, and opens each run's pull request against the
+previous run's branch, the first against the base branch. Nothing is merged.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
             <b><code>expires_at</code></b>
               (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
-            <p>RFC 3339 deadline for the whole plan, at most seven days in the future.</p>
+            <p>RFC 3339 deadline for the whole stack, at most seven days in the future.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
             <b><code>runs</code></b>
-              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="              MergePlanRun(*, input: JsonValue, needs: tuple[str, ...] = ())
+              (<code><span title="collections.abc.Mapping">Mapping</span>[<span title="str">str</span>, <a class="autorefs autorefs-internal" title="              StackRun(*, input: JsonValue, needs: tuple[str, ...] = ())
 
   
       dataclass
-   (zeroshot.plans.MergePlanRun)" href="#zeroshot.MergePlanRun">MergePlanRun</a>]</code>)
+   (zeroshot.stacks.StackRun)" href="#zeroshot.StackRun">StackRun</a>]</code>)
           –
           <div class="doc-md-description">
-            <p>Node names mapped to static inputs and symbolic dependencies.</p>
+            <p>Run names mapped to static inputs and symbolic dependencies.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -3167,15 +3534,15 @@ declare GH_TOKEN; only the Git delivery binding can declare it.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="zeroshot.MergePlanRequest.to_dict" class="doc doc-heading">
+<h3 id="zeroshot.StackRequest.to_dict" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">to_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]</span></code>
 
-<a href="#zeroshot.MergePlanRequest.to_dict" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#zeroshot.StackRequest.to_dict" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Return the strict public merge-plan manifest consumed by Zeroshot.</p>
+        <p>Return the strict public stack manifest consumed by Zeroshot.</p>
 
 
     </div>
@@ -3194,28 +3561,28 @@ declare GH_TOKEN; only the Git delivery binding can declare it.</p>
 
 
 
-<h2 id="zeroshot.MergePlanRun" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">MergePlanRun</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">JsonValue</span><span class="p">,</span> <span class="n">needs</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">())</span></code>
+<h2 id="zeroshot.StackRun" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">StackRun</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">JsonValue</span><span class="p">,</span> <span class="n">needs</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">())</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-<a href="#zeroshot.MergePlanRun" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#zeroshot.StackRun" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents ">
 
 
 
-        <p>One statically defined node in a hosted merge plan.</p>
+        <p>One statically defined run in a hosted stack.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
             <b><code>input</code></b>
-              (<code><a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = None | bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue']
+              (<code><a class="autorefs autorefs-internal" title="            JsonValue: TypeAlias = bool | int | float | str | list['JsonValue'] | dict[str, 'JsonValue'] | None
 
   
       module-attribute
@@ -3232,7 +3599,10 @@ declare GH_TOKEN; only the Git delivery binding can declare it.</p>
 )
           –
           <div class="doc-md-description">
-            <p>Symbolic node names that must merge successfully before this node becomes ready.</p>
+            <p>Symbolic run names that must succeed before this run becomes ready. With "merge"
+delivery each of them has merged into the base branch first. With
+"stacked_pull_requests" delivery they only order the linear stack, in which each run
+needs exactly the run before it.</p>
           </div>
         </li>
     </ul>
@@ -3261,15 +3631,15 @@ declare GH_TOKEN; only the Git delivery binding can declare it.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="zeroshot.MergePlanRun.to_dict" class="doc doc-heading">
+<h3 id="zeroshot.StackRun.to_dict" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">to_dict</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]</span></code>
 
-<a href="#zeroshot.MergePlanRun.to_dict" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#zeroshot.StackRun.to_dict" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Return this node's exact manifest representation.</p>
+        <p>Return this run's exact manifest representation.</p>
 
 
     </div>
@@ -3312,7 +3682,7 @@ declare GH_TOKEN; only the Git delivery binding can declare it.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    Last updated <time datetime="2026-10-19">19 October 2026</time>
+    Last updated <time datetime="2026-11-07">7 November 2026</time>
   </span>
 
     
@@ -3450,7 +3820,7 @@ declare GH_TOKEN; only the Git delivery binding can declare it.</p>
       
       
     
-    <a href="https://x.com/OpenEngineHQ" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+    <a href="https://x.com/OpenEngineCo" target="_blank" rel="noopener" title="x.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
     </a>
   

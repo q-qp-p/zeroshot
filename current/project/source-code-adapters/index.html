@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Versioned documentation for the Zeroshot CLI, protocol, and Python SDK">
+        <meta name="description" content="Understand local folders, Git transport and forge delivery as separate concerns, including exact source identity for contained runs.">
       
       
       
@@ -15,6 +15,8 @@
       
         <link rel="prev" href="../../zeroshot-distribution/">
       
+      
+        <link rel="next" href="../harness-adapters/">
       
       
         
@@ -43,15 +45,11 @@
     
     
       
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spline+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Spline Sans";--md-code-font:"Roboto Mono"}</style>
-      
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/fonts/fonts.css">
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
@@ -61,6 +59,28 @@
 
     
     
+  
+  
+    
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="zeroshot">
+    <meta property="og:title" content="Source-code adapters | zeroshot docs">
+    <meta property="og:description" content="Understand local folders, Git transport and forge delivery as separate concerns, including exact source identity for contained runs.">
+    <meta property="og:url" content="https://zeroshot.sh/docs/current/project/source-code-adapters/">
+    <meta property="og:image" content="https://zeroshot.sh/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Source-code adapters | zeroshot docs">
+    <meta name="twitter:description" content="Understand local folders, Git transport and forge delivery as separate concerns, including exact source identity for contained runs.">
+    <meta name="twitter:image" content="https://zeroshot.sh/og.jpg">
+    
+      
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/", "name": "zeroshot docs", "position": 1}, {"@type": "ListItem", "item": "https://zeroshot.sh/docs/current/project/source-code-adapters/", "name": "Source-code adapters", "position": 2}]}</script>
+    
+  
+
   </head>
   
   
@@ -577,6 +597,18 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -629,6 +661,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/planning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan work before running it
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/runtime-environments/" class="md-nav__link">
         
   
@@ -657,6 +717,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/active-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/review-loop/" class="md-nav__link">
         
   
@@ -665,6 +753,118 @@
     
   
     Build a review loop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review an issue or PR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/code-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Review a PR in depth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/forge-delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub and GitLab delivery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/stacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Submit a stack
   
 
     
@@ -1389,6 +1589,8 @@
       
         
       
+        
+      
     
     
     
@@ -1587,6 +1789,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../harness-adapters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness adapters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1601,14 +1831,14 @@
   
   
     <li class="md-nav__item">
-      <a href="https://cloud.zeroshot.sh/docs" class="md-nav__link">
+      <a href="https://app.zeroshot.sh/docs" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Zeroshot Cloud
+    Zeroshot Platform
   
 
     
@@ -1738,12 +1968,14 @@ PR, and merge nodes keep their receipt, repair, cancellation, and recovery behav
 </tr>
 </tbody>
 </table>
-<p>GitLab, Forgejo, and other Git hosts can use checkout and push now. Their forge APIs need adapters
-for PR and merge behavior. GitHub is the maintained forge implementation.</p>
+<p>GitHub (including Enterprise) and GitLab have maintained delivery adapters. Other Git hosts can
+use checkout and push; their review and merge APIs need an adapter. See
+<a href="../../guides/forge-delivery/">GitHub and GitLab delivery</a> for setup and version requirements.</p>
 <h2 id="ownership-and-registration">Ownership and registration<a class="headerlink" href="#ownership-and-registration" title="Permanent link">&para;</a></h2>
 <p><code>zeroshot/src/source_code/provider/</code> contains effect-free contracts and
-<code>SourceCodeProviderRegistry</code>. Provider, repository, and review identities are bounded opaque values;
-GitHub grammar and policy belong to its implementation.</p>
+<code>SourceCodeProviderRegistry</code>. Provider, repository, and review identities are bounded opaque values.
+Each adapter owns its repository grammar and policy. The shared source identity carries a canonical
+HTTPS web base, including an optional installation path prefix, separately from the Git locator.</p>
 <p>Maintained implementations live in <code>zeroshot/src/source_code/adapters/core/</code>. Contributions live in
 <code>zeroshot/src/source_code/adapters/contributed/</code> and register through that folder's <code>register</code> hook.
 The same registry proves required capabilities during preflight and returns delivery authority
@@ -1751,13 +1983,15 @@ during composition. Metadata-only registration must perform no filesystem, proce
 network effects. The provider's pure <code>repository_from_remote</code> hook identifies its forge from a
 credential-free Git locator text after the run boundary validates the URL. Contracts stay independent
 of protocol and process implementations. The same registry rejects ambiguous matches; both local and named CLI
-source selection use it. Runtime registration receives the selected source and scoped shared Git transport.</p>
+source selection use it. Explicit instance selection uses the same provider's <code>repository_from_remote_at</code>
+hook; it must prove that the forge repository matches the Git locator. Runtime registration receives
+the selected source and scoped shared Git transport.</p>
 <p>Implement <code>SourceCodeProvider</code> for descriptor and source operations, and <code>SourceDeliveryAuthority</code>
 for the existing delivery workflow. A forge owns its credential field, repository and review
 grammar, checks, policy, and authoritative merge result. Git effects reuse the shared transport.
 A custom API token never acquires GitHub Git authentication authority. Provider credentials are
 available only through the admitted delivery connection or private source capability.</p>
-<p>No new delivery node family or closed forge enum is needed. Embedders can register adapters in
+<p>Adding a forge needs no new delivery node family or closed forge enum. Embedders can register adapters in
 <code>SourceCodeProviderRegistry</code> and use registry-aware admission. The contribution acceptance test
 admits an opaque nested repository and review ID, uses its own token field and credential refresh,
 and drives the existing PR and merge nodes through the supervisor and ledger.</p>
@@ -1781,7 +2015,18 @@ when composing a candidate or allocator. Built-in placements use the contributed
 SourceCodeProvider.delivery_authority. Its descriptor advertises the operations that adapter
 supports. The older inspect_operation/operate contract remains available for callers of atomic
 operations; maintained adapters currently return an explicit unavailable error through that seam.
-Forge credential selection has one authority: SourceDeliveryAuthority.forge_credential_field.</p>
+Forge credential fields and default connection requirements belong to the registered adapter.
+Generated delivery bindings remain empty until placement selects the source or comment destination;
+materialization preserves explicit connection keys and fields. Review receipt links come from the
+adapter, so consumers never construct a provider's resource paths from opaque IDs.</p>
+<p>Conversation comments are a separate operation exposed through the same registry's optional
+comment authority. Pure URL identification and capability admission do not require a Git source.
+The native publisher owns bounded create/reconciliation and a durable lineage publication store;
+the forge supplies actor, comment identity, paginated reads, creation, and exact review-scope checks.
+Comment authority does not acquire Git transport access or a model session.
+Its frozen destination includes provider and instance identity. Publication records retain that
+destination across retries, including GitLab installation prefixes. The adapter validates the exact
+resource permalink; the publisher also checks actor, body hash, and lineage marker.</p>
 
 
 
@@ -1802,7 +2047,7 @@ Forge credential selection has one authority: SourceDeliveryAuthority.forge_cred
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    Last updated <time datetime="2026-10-15">15 October 2026</time>
+    Last updated <time datetime="2026-10-30">30 October 2026</time>
   </span>
 
     
@@ -1853,6 +2098,22 @@ Forge credential selection has one authority: SourceDeliveryAuthority.forge_cred
             </div>
           </a>
         
+        
+          
+          <a href="../harness-adapters/" class="md-footer__link md-footer__link--next" aria-label="Next: Harness adapters">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Harness adapters
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
@@ -1924,7 +2185,7 @@ Forge credential selection has one authority: SourceDeliveryAuthority.forge_cred
       
       
     
-    <a href="https://x.com/OpenEngineHQ" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+    <a href="https://x.com/OpenEngineCo" target="_blank" rel="noopener" title="x.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
     </a>
   
